@@ -1,0 +1,12 @@
+//
+//  Development.xcconfig
+//  FCFAppleWallet
+//
+//  Created by Liguo Jiao on 13/12/18.
+//  Copyright © 2018 Liguo Jiao. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+MERCHANT_IDENTIFIER = 123
