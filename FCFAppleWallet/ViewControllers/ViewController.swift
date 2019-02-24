@@ -11,7 +11,6 @@ import PassKit
 
 class ViewController: UIViewController {
 
-
     weak var payButton: UIImageView?
     weak var payLabel: UILabel?
     var paymentNetwork: [PKPaymentNetwork]!
