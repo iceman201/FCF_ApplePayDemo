@@ -136,10 +136,20 @@ extension ViewController: PKAddPaymentPassViewControllerDelegate {
 
     func addPaymentPassViewController(_ controller: PKAddPaymentPassViewController, didFinishAdding pass: PKPaymentPass?, error: Error?) {
         if let err = error {
+            let alert = UIAlertController(title: "Error", message: "\(error?.localizedDescription ?? "")", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             debugPrint(err)
         }
+        if pass?.activationState == PKPaymentPassActivationState.activated {
+            print("haha")
+        }
         dismiss(animated: true) {
-
+            //Store the card success
+            if error == nil {
+                self.payLabel?.text = "Success"
+            }
+            print("closed")
         }
     }
 }
