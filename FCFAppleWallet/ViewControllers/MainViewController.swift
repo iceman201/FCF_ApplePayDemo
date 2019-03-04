@@ -6,6 +6,21 @@
 //  Copyright © 2018 Liguo Jiao. All rights reserved.
 //
 
+/*
+#pragma mark - View Life
+//视图生命周期
+#pragma mark - Setup
+//创建视图等
+#pragma mark - Lazy Load、Getter、Setter
+//懒加载、Getter和Setter
+#pragma mark - Event、Callbacks
+//事件、回调等
+#pragma mark - Delegate And DataSource
+//代理和数据源方法
+#pragma mark - Private
+//私有方法
+*/
+
 import UIKit
 import PassKit
 
@@ -48,7 +63,7 @@ class MainViewController: UIViewController {
         height.isActive = true
 
         let pay = UIImageView(image: #imageLiteral(resourceName: "wallet"), highlightedImage: nil)
-        let tapPay = UITapGestureRecognizer(target: self, action: #selector(ViewController.tapOnPay))
+        let tapPay = UITapGestureRecognizer(target: self, action: #selector(MainViewController.tapOnPay))
         tapPay.numberOfTapsRequired = 1
         tapPay.numberOfTouchesRequired = 1
         centerContainer.addSubview(pay)
@@ -81,7 +96,10 @@ class MainViewController: UIViewController {
     }
 
     @objc func tapOnPay() {
-        self.initProvisioning(PKPaymentNetwork.visa)
+        let vc = WalletViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+//        self.initProvisioning(PKPaymentNetwork.visa) // Trigger Adding Visa Credit Card info
+        
 //        if PKPaymentAuthorizationController.canMakePayments(usingNetworks: self.paymentNetwork) {
 //            guard let merchant = self.getValueFromPlist(identifier: "MerchantIdentifier") else { return }
 //            paymentRequest.currencyCode = "USD"
@@ -100,11 +118,11 @@ class MainViewController: UIViewController {
     }
 
     func canAddCardToWallet(primaryAccountId: String) -> Bool {
-        return passLib .canAddPaymentPass(withPrimaryAccountIdentifier: primaryAccountId)
+        return passLib.canAddPaymentPass(withPrimaryAccountIdentifier: primaryAccountId)
     }
 }
 
-extension ViewController: PKAddPaymentPassViewControllerDelegate {
+extension MainViewController: PKAddPaymentPassViewControllerDelegate {
     func initProvisioning(_ paymentType: PKPaymentNetwork) {
         let passDetails = PKAddPaymentPassRequestConfiguration(encryptionScheme: PKEncryptionScheme.RSA_V2)
         passDetails?.cardholderName = ""

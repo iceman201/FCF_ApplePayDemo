@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05E1AC15222D3E0000A9895A /* ParseFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC14222D3E0000A9895A /* ParseFont.swift */; };
+		05E1AC18222D3E8B00A9895A /* EXTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC17222D3E8B00A9895A /* EXTFont.swift */; };
+		05E1AC19222D44EE00A9895A /* FontAwesome5Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 05868887222D2E4500BFB2F3 /* FontAwesome5Free-Solid-900.otf */; };
+		05E1AC1B222D46D300A9895A /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC1A222D46D300A9895A /* WalletViewController.swift */; };
+		05E1AC1D222D4A4D00A9895A /* TransactionRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC1C222D4A4D00A9895A /* TransactionRecordCell.swift */; };
 		4B7E68654601711ECD439E83 /* Pods_FCFAppleWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D27936EED2EE691A7F5EC /* Pods_FCFAppleWallet.framework */; };
 		EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6521BF6286003831C3 /* AppDelegate.swift */; };
 		EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6721BF6286003831C3 /* MainViewController.swift */; };
@@ -20,6 +25,11 @@
 
 /* Begin PBXFileReference section */
 		037D27936EED2EE691A7F5EC /* Pods_FCFAppleWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FCFAppleWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05868887222D2E4500BFB2F3 /* FontAwesome5Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontAwesome5Free-Solid-900.otf"; sourceTree = "<group>"; };
+		05E1AC14222D3E0000A9895A /* ParseFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFont.swift; sourceTree = "<group>"; };
+		05E1AC17222D3E8B00A9895A /* EXTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXTFont.swift; sourceTree = "<group>"; };
+		05E1AC1A222D46D300A9895A /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		05E1AC1C222D4A4D00A9895A /* TransactionRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRecordCell.swift; sourceTree = "<group>"; };
 		578F9471F7258DFCFB57E050 /* Pods-FCFAppleWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FCFAppleWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FCFAppleWallet/Pods-FCFAppleWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		8101AB4E0577777D0896D9D8 /* Pods-FCFAppleWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FCFAppleWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-FCFAppleWallet/Pods-FCFAppleWallet.release.xcconfig"; sourceTree = "<group>"; };
 		EA8CCE6221BF6286003831C3 /* FCFAppleWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCFAppleWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,8 +63,33 @@
 		05868885222D2B3700BFB2F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				05E1AC1C222D4A4D00A9895A /* TransactionRecordCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		05868886222D2DCC00BFB2F3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				05868887222D2E4500BFB2F3 /* FontAwesome5Free-Solid-900.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		05E1AC13222D3C5400A9895A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				05E1AC14222D3E0000A9895A /* ParseFont.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		05E1AC16222D3E7300A9895A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				05E1AC17222D3E8B00A9895A /* EXTFont.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9B7E85A0DD3A6A76BE6BF798 /* Pods */ = {
@@ -88,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				EAB4E9D321C1BB4900B75BD8 /* Config */,
+				05E1AC16222D3E7300A9895A /* Extensions */,
+				05E1AC13222D3C5400A9895A /* Model */,
 				05868885222D2B3700BFB2F3 /* View */,
 				EAB4E9D421C1BB5000B75BD8 /* ViewControllers */,
 				EAB4E9D221C1BB0700B75BD8 /* Supports */,
@@ -110,6 +147,7 @@
 		EAB4E9D221C1BB0700B75BD8 /* Supports */ = {
 			isa = PBXGroup;
 			children = (
+				05868886222D2DCC00BFB2F3 /* Fonts */,
 				EA8CCE6C21BF6287003831C3 /* Assets.xcassets */,
 				EA8CCE6E21BF6287003831C3 /* LaunchScreen.storyboard */,
 				EA8CCE7121BF6287003831C3 /* Info.plist */,
@@ -132,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				EA8CCE6721BF6286003831C3 /* MainViewController.swift */,
+				05E1AC1A222D46D300A9895A /* WalletViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -202,6 +241,7 @@
 			files = (
 				EA8CCE7021BF6287003831C3 /* LaunchScreen.storyboard in Resources */,
 				EA8CCE6D21BF6287003831C3 /* Assets.xcassets in Resources */,
+				05E1AC19222D44EE00A9895A /* FontAwesome5Free-Solid-900.otf in Resources */,
 				EA8CCE6B21BF6286003831C3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,9 +278,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05E1AC18222D3E8B00A9895A /* EXTFont.swift in Sources */,
 				EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */,
+				05E1AC1B222D46D300A9895A /* WalletViewController.swift in Sources */,
+				05E1AC1D222D4A4D00A9895A /* TransactionRecordCell.swift in Sources */,
 				EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */,
 				EA8CCE7C21BF73C6003831C3 /* Defines.swift in Sources */,
+				05E1AC15222D3E0000A9895A /* ParseFont.swift in Sources */,
 				EAB4E9E021C1CC5B00B75BD8 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
