@@ -9,7 +9,7 @@
 import UIKit
 import PassKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     weak var payButton: UIImageView?
     weak var payLabel: UILabel?

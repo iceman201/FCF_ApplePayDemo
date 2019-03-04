@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B7E68654601711ECD439E83 /* Pods_FCFAppleWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D27936EED2EE691A7F5EC /* Pods_FCFAppleWallet.framework */; };
 		EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6521BF6286003831C3 /* AppDelegate.swift */; };
-		EA8CCE6821BF6286003831C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6721BF6286003831C3 /* ViewController.swift */; };
+		EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6721BF6286003831C3 /* MainViewController.swift */; };
 		EA8CCE6B21BF6286003831C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA8CCE6921BF6286003831C3 /* Main.storyboard */; };
 		EA8CCE6D21BF6287003831C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA8CCE6C21BF6287003831C3 /* Assets.xcassets */; };
 		EA8CCE7021BF6287003831C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA8CCE6E21BF6287003831C3 /* LaunchScreen.storyboard */; };
@@ -24,7 +24,7 @@
 		8101AB4E0577777D0896D9D8 /* Pods-FCFAppleWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FCFAppleWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-FCFAppleWallet/Pods-FCFAppleWallet.release.xcconfig"; sourceTree = "<group>"; };
 		EA8CCE6221BF6286003831C3 /* FCFAppleWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCFAppleWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA8CCE6521BF6286003831C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EA8CCE6721BF6286003831C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EA8CCE6721BF6286003831C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EA8CCE6A21BF6286003831C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EA8CCE6C21BF6287003831C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA8CCE6F21BF6287003831C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +50,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05868885222D2B3700BFB2F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9B7E85A0DD3A6A76BE6BF798 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				EAB4E9D321C1BB4900B75BD8 /* Config */,
+				05868885222D2B3700BFB2F3 /* View */,
 				EAB4E9D421C1BB5000B75BD8 /* ViewControllers */,
 				EAB4E9D221C1BB0700B75BD8 /* Supports */,
 				EA8CCE7721BF62CC003831C3 /* FCFAppleWallet.entitlements */,
@@ -123,7 +131,7 @@
 		EAB4E9D421C1BB5000B75BD8 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EA8CCE6721BF6286003831C3 /* ViewController.swift */,
+				EA8CCE6721BF6286003831C3 /* MainViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -230,7 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA8CCE6821BF6286003831C3 /* ViewController.swift in Sources */,
+				EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */,
 				EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */,
 				EA8CCE7C21BF73C6003831C3 /* Defines.swift in Sources */,
 				EAB4E9E021C1CC5B00B75BD8 /* Extension.swift in Sources */,
