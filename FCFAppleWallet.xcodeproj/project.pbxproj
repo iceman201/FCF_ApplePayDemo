@@ -21,6 +21,8 @@
 		EA8CCE7C21BF73C6003831C3 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE7B21BF73C6003831C3 /* Defines.swift */; };
 		EAB4E9E021C1CC5B00B75BD8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB4E9DF21C1CC5B00B75BD8 /* Extension.swift */; };
 		EAB4E9E221C2088F00B75BD8 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB4E9E121C2088F00B75BD8 /* PassKit.framework */; };
+		EADA26CF222DE1FF0042BC5A /* EXTUserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA26CE222DE1FF0042BC5A /* EXTUserInterface.swift */; };
+		EADA26D1222E2C170042BC5A /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA26D0222E2C170042BC5A /* CreditCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		EAB4E9D821C1BBB400B75BD8 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		EAB4E9DF21C1CC5B00B75BD8 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		EAB4E9E121C2088F00B75BD8 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		EADA26CE222DE1FF0042BC5A /* EXTUserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXTUserInterface.swift; sourceTree = "<group>"; };
+		EADA26D0222E2C170042BC5A /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				05E1AC1C222D4A4D00A9895A /* TransactionRecordCell.swift */,
+				EADA26D0222E2C170042BC5A /* CreditCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -88,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				05E1AC17222D3E8B00A9895A /* EXTFont.swift */,
+				EADA26CE222DE1FF0042BC5A /* EXTUserInterface.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -281,6 +287,8 @@
 				05E1AC18222D3E8B00A9895A /* EXTFont.swift in Sources */,
 				EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */,
 				05E1AC1B222D46D300A9895A /* WalletViewController.swift in Sources */,
+				EADA26D1222E2C170042BC5A /* CreditCardView.swift in Sources */,
+				EADA26CF222DE1FF0042BC5A /* EXTUserInterface.swift in Sources */,
 				05E1AC1D222D4A4D00A9895A /* TransactionRecordCell.swift in Sources */,
 				EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */,
 				EA8CCE7C21BF73C6003831C3 /* Defines.swift in Sources */,
