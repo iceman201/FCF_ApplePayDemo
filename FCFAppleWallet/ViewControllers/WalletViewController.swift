@@ -51,7 +51,7 @@ class WalletViewController: UIViewController {
         headerTopContainerView.topAnchor.constraint(equalTo: headerView.topAnchor, constant: padding * 2).isActive = true
         headerTopContainerView.heightAnchor.constraint(equalTo: headerTopContainerView.widthAnchor, multiplier: 1.0/1.5).isActive = true
 
-        let divider = addDivider(on: headerView, topOf: headerTopContainerView)
+//        let divider = addDivider(on: headerView, topOf: headerTopContainerView)
 
         
 
