@@ -17,15 +17,21 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
     }
     weak var pageControl: UIPageControl?
 
-    var cards: [CreditCard]?
+    public var cards: [CreditCard]?
 
     private let gap: CGFloat = padding * 2
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+//        guard let _ = cards else { return }
+        
         loadViews()
         let one = CreditCard()
-        one.backgroundColor = .cyan
+        one.backgroundColor = .gray
+        one.loadContent(cardName: "Liguo Jiao",
+                        cardNumber: "• • • •     • • • •     • • • •     7768",
+                        cardDate: "06/23",
+                        cardProvider: String.fontAwesomeIcon(name: FontAwesome.ccAmex))
         let two = CreditCard()
         two.backgroundColor = .yellow
         let three = CreditCard()
@@ -69,13 +75,13 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
 
     func loadCreditCard(cards: [CreditCard]) {
         self.setNeedsLayout()
-        self.scrollView?.contentSize = CGSize(width: self.frame.width * CGFloat(cards.count), height: 0)
+        self.scrollView?.contentSize = CGSize(width: self.scrollView!.frame.width * CGFloat(cards.count), height: 0)
         self.scrollView?.isPagingEnabled = true
         for index in 0 ..< cards.count {
             let width = self.frame.width - gap * 2
             let leadingAndTrailingSpace = (gap / 2 * CGFloat(index * 2) + gap / 2)
             let cardSpace = width * CGFloat(index)
-            cards[index].frame = CGRect(x: leadingAndTrailingSpace + cardSpace, y: 0, width: width, height: self.frame.height)
+            cards[index].frame = CGRect(x: leadingAndTrailingSpace + cardSpace, y: 0, width: width, height: self.scrollView!.frame.height)
             self.scrollView?.addSubview(cards[index])
         }
     }
@@ -94,24 +100,26 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         let percentageHorizontalOffset: CGFloat = currentHorizontalOffset / maximumHorizontalOffset
         let percentageVerticalOffset: CGFloat = currentVerticalOffset / maximumVerticalOffset
 
-//        let percentOffset: CGPoint = CGPoint(x: percentageHorizontalOffset, y: percentageVerticalOffset)
-
+        let percentOffset: CGPoint = CGPoint(x: percentageHorizontalOffset, y: percentageVerticalOffset)
+        
+//        guard let cards = self.cards else { return }
+//
 //        if(percentOffset.x > 0 && percentOffset.x <= 0.25) {
 //
-//            cards[0].imageView.transform = CGAffineTransform(scaleX: (0.25-percentOffset.x)/0.25, y: (0.25-percentOffset.x)/0.25)
-//            cards[1].imageView.transform = CGAffineTransform(scaleX: percentOffset.x/0.25, y: percentOffset.x/0.25)
+//            cards[0].transform = CGAffineTransform(scaleX: (0.25-percentOffset.x)/0.25, y: (0.25-percentOffset.x)/0.25)
+//            cards[1].transform = CGAffineTransform(scaleX: percentOffset.x/0.25, y: percentOffset.x/0.25)
 //
 //        } else if(percentOffset.x > 0.25 && percentOffset.x <= 0.50) {
-//            cards[1].imageView.transform = CGAffineTransform(scaleX: (0.50-percentOffset.x)/0.25, y: (0.50-percentOffset.x)/0.25)
-//            cards[2].imageView.transform = CGAffineTransform(scaleX: percentOffset.x/0.50, y: percentOffset.x/0.50)
+//            cards[1].transform = CGAffineTransform(scaleX: (0.50-percentOffset.x)/0.25, y: (0.50-percentOffset.x)/0.25)
+//            cards[2].transform = CGAffineTransform(scaleX: percentOffset.x/0.50, y: percentOffset.x/0.50)
 //
 //        } else if(percentOffset.x > 0.50 && percentOffset.x <= 0.75) {
-//            cards[2].imageView.transform = CGAffineTransform(scaleX: (0.75-percentOffset.x)/0.25, y: (0.75-percentOffset.x)/0.25)
-//            cards[3].imageView.transform = CGAffineTransform(scaleX: percentOffset.x/0.75, y: percentOffset.x/0.75)
+//            cards[2].transform = CGAffineTransform(scaleX: (0.75-percentOffset.x)/0.25, y: (0.75-percentOffset.x)/0.25)
+//            cards[3].transform = CGAffineTransform(scaleX: percentOffset.x/0.75, y: percentOffset.x/0.75)
 //
 //        } else if(percentOffset.x > 0.75 && percentOffset.x <= 1) {
-//            cards[3].imageView.transform = CGAffineTransform(scaleX: (1-percentOffset.x)/0.25, y: (1-percentOffset.x)/0.25)
-//            cards[4].imageView.transform = CGAffineTransform(scaleX: percentOffset.x, y: percentOffset.x)
+//            cards[3].transform = CGAffineTransform(scaleX: (1-percentOffset.x)/0.25, y: (1-percentOffset.x)/0.25)
+//            cards[4].transform = CGAffineTransform(scaleX: percentOffset.x, y: percentOffset.x)
 //        }
     }
 

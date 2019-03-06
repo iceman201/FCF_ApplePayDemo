@@ -17,8 +17,8 @@ public extension String {
 }
 
 public extension UIFont {
-    public class func fontAwesome(ofSize fontSize: CGFloat) -> UIFont {
-        return UIFont(name: "FontAwesome5Free-Solid", size: fontSize)!
+    public class func fontAwesome(ofSize fontSize: CGFloat, isBrandIcon: Bool = false) -> UIFont {
+        return UIFont(name: isBrandIcon ? "FontAwesome5Brands-Regular" : "FontAwesome5Free-Solid", size: fontSize)!
     }
 }
 
