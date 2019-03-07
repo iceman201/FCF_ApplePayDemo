@@ -43,7 +43,6 @@ class WalletViewController: UIViewController {
         content.tableHeaderView?.layoutIfNeeded()
 
         let headerTopContainerView = CreditCardPickerView()
-        headerTopContainerView.backgroundColor = .gray
         headerView.addSubview(headerTopContainerView)
         headerTopContainerView.translatesAutoresizingMaskIntoConstraints = false
         headerTopContainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
