@@ -27,15 +27,18 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         
         loadViews()
         let one = CreditCard()
-        one.backgroundColor = .gray
-        one.loadContent(cardName: "Liguo Jiao",
+        one.loadContent(cardName: "L. SMITH",
                         cardNumber: "• • • •     • • • •     • • • •     7768",
                         cardDate: "06/23",
-                        cardProvider: String.fontAwesomeIcon(name: FontAwesome.ccAmex))
+                        cardProvider: PaymentLogo.mastercard)
+        
         let two = CreditCard()
-        two.backgroundColor = .yellow
+        two.loadContent(cardName: "T S. GIBSON",
+                        cardNumber: "• • • •     • • • •     • • • •     3321",
+                        cardDate: "06/23",
+                        cardProvider: PaymentLogo.visa)
         let three = CreditCard()
-        three.backgroundColor = .brown
+        three.loadContent(cardName: "J S. SWOFFORD", cardNumber: "• • • •     • • • • • •     21101", cardDate: "95", cardProvider: PaymentLogo.americanExpress)
         cards = [one, two, three]
         self.pageControl?.numberOfPages = cards?.count ?? 0
         self.pageControl?.currentPage = 0
@@ -47,7 +50,6 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
 
     private func loadViews() {
         let container = UIScrollView()
-        container.backgroundColor = .green
         container.showsVerticalScrollIndicator = false
         container.showsHorizontalScrollIndicator = false
         self.addSubview(container)
@@ -81,7 +83,7 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
             let width = self.frame.width - gap * 2
             let leadingAndTrailingSpace = (gap / 2 * CGFloat(index * 2) + gap / 2)
             let cardSpace = width * CGFloat(index)
-            cards[index].frame = CGRect(x: leadingAndTrailingSpace + cardSpace, y: 0, width: width, height: self.scrollView!.frame.height)
+            cards[index].frame = CGRect(x: leadingAndTrailingSpace + cardSpace, y: 0, width: width, height: self.scrollView!.frame.height - padding)
             self.scrollView?.addSubview(cards[index])
         }
     }
