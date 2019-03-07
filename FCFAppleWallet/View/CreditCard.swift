@@ -47,18 +47,23 @@ class CreditCard: UIView {
         let providerLogo = UILabel()
         providerLogo.textColor = UIColor(hexString: "#007bc1")
         providerLogo.font = UIFont.fontAwesome(ofSize: 46, isBrandIcon: true)
-        let v = CALayer()
-        v.frame = CGRect(x: 0, y: 0, width: 45, height: 30)
-        v.backgroundColor = UIColor.white.cgColor
         self.addSubview(providerLogo)
-        providerLogo.layer.insertSublayer(v, below: providerLogo.layer)//(v)
-        
-        
         providerLogo.translatesAutoresizingMaskIntoConstraints = false
         providerLogo.topAnchor.constraint(equalTo: companyLogo.topAnchor).isActive = true
         providerLogo.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding * 2).isActive = true
         self.cardProviderLogo = providerLogo
-        
+
+        let v = UIView()
+        v.layer.cornerRadius = padding
+        self.addSubview(v)
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.topAnchor.constraint(equalTo: providerLogo.topAnchor, constant: 3).isActive = true
+        v.leadingAnchor.constraint(equalTo: providerLogo.leadingAnchor, constant: 0).isActive = true
+        v.trailingAnchor.constraint(equalTo: providerLogo.trailingAnchor, constant: 0).isActive = true
+        v.bottomAnchor.constraint(equalTo: providerLogo.bottomAnchor, constant: -3).isActive = true
+        v.backgroundColor = UIColor.white
+        self.sendSubviewToBack(v)
+
         let number = UILabel()
         number.textColor = .white
         number.font = UIFont.systemFont(ofSize: 20, weight: .medium)
