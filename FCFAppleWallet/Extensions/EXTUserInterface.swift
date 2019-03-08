@@ -8,7 +8,20 @@
 
 import UIKit
 
-let padding: CGFloat = 8
+// MARK: UI Components
+extension UIViewController {
+    func addDivider(on headerView: UIView, topOf headerTopContainerView: UIView) -> UIView {
+        let divider = UIView()
+        divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        headerView.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.topAnchor.constraint(equalTo: headerTopContainerView.bottomAnchor, constant: padding * 2).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
+        divider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
+        return divider
+    }
+}
 
 extension UIColor {
     convenience init(hexString: String) {
@@ -27,5 +40,15 @@ extension UIColor {
             (a, r, g, b) = (255, 0, 0, 0)
         }
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+}
+
+
+// MARK: UI Style sheet
+let padding: CGFloat = 8
+
+extension UIColor {
+    open class var fiservOrange: UIColor {
+        return UIColor(displayP3Red: 232/255, green: 111/255, blue: 45/255, alpha: 1)
     }
 }

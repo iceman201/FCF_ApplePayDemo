@@ -22,18 +22,17 @@
 */
 
 import UIKit
-import PassKit
-
 class MainViewController: UIViewController {
 
-    weak var payButton: UIImageView?
+
     weak var payLabel: UILabel?
-    var paymentNetwork: [PKPaymentNetwork]!
-    let paymentRequest = PKPaymentRequest()
-    let passLib = PKPassLibrary()
+
 
     override func loadView() {
         super.loadView()
+        self.navigationController?.isNavigationBarHidden = true
+        
+
         let watermark = UIImageView(image: #imageLiteral(resourceName: "pay_tag"), highlightedImage: nil)
         self.view.addSubview(watermark)
         watermark.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +73,7 @@ class MainViewController: UIViewController {
         pay.topAnchor.constraint(equalTo: centerContainer.topAnchor, constant: 0).isActive = true
         pay.heightAnchor.constraint(equalToConstant: 80).isActive = true
         pay.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        payButton = pay
+
 
         let tipMessage = UILabel()
         tipMessage.numberOfLines = 0
@@ -92,83 +91,14 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        paymentNetwork = [.amex, .chinaUnionPay, .discover, .masterCard, .visa]
+
+        
     }
 
     @objc func tapOnPay() {
         let vc = WalletViewController()
         self.navigationController?.pushViewController(vc, animated: true)
-//        self.initProvisioning(PKPaymentNetwork.visa) // Trigger Adding Visa Credit Card info
-        
-//        if PKPaymentAuthorizationController.canMakePayments(usingNetworks: self.paymentNetwork) {
-//            guard let merchant = self.getValueFromPlist(identifier: "MerchantIdentifier") else { return }
-//            paymentRequest.currencyCode = "USD"
-//            paymentRequest.countryCode = "US"
-//            paymentRequest.merchantIdentifier = merchant
-//            paymentRequest.supportedNetworks = paymentNetwork
-//            paymentRequest.merchantCapabilities = [.capability3DS, .capabilityCredit]
-//            paymentRequest.requiredShippingContactFields = [.name, .emailAddress, .postalAddress]
-//        }
     }
 
-
-
-    func isWalletAvailable() -> Bool {
-        return PKAddPaymentPassViewController.canAddPaymentPass()
-    }
-
-    func canAddCardToWallet(primaryAccountId: String) -> Bool {
-        return passLib.canAddPaymentPass(withPrimaryAccountIdentifier: primaryAccountId)
-    }
-}
-
-extension MainViewController: PKAddPaymentPassViewControllerDelegate {
-    func initProvisioning(_ paymentType: PKPaymentNetwork) {
-        let passDetails = PKAddPaymentPassRequestConfiguration(encryptionScheme: PKEncryptionScheme.RSA_V2)
-        passDetails?.cardholderName = ""
-        passDetails?.primaryAccountSuffix = ""
-        passDetails?.localizedDescription = ""
-        passDetails?.primaryAccountIdentifier = ""
-        passDetails?.paymentNetwork = paymentType
-
-        let passViewController = PKAddPaymentPassViewController(requestConfiguration: passDetails!, delegate: self as PKAddPaymentPassViewControllerDelegate)
-        self.present(passViewController!, animated: true, completion: nil)
-    }
-
-    func addPaymentPassViewController(_ controller: PKAddPaymentPassViewController, generateRequestWithCertificateChain certificates: [Data], nonce: Data, nonceSignature: Data, completionHandler handler: @escaping (PKAddPaymentPassRequest) -> Void) {
-        /* Information we need to send to DCIS */
-        let _ = certificates
-        let _ = nonce
-        let _ = nonceSignature
-
-        /* Service Call to DCIS */
-
-        /* Create Payment pass request*/
-        let passRequest = PKAddPaymentPassRequest()
-        passRequest.encryptedPassData = Data()
-        passRequest.activationData = Data()
-        passRequest.ephemeralPublicKey = Data()
-
-
-    }
-
-    func addPaymentPassViewController(_ controller: PKAddPaymentPassViewController, didFinishAdding pass: PKPaymentPass?, error: Error?) {
-        if let err = error {
-            let alert = UIAlertController(title: "Error", message: "\(error?.localizedDescription ?? "")", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            debugPrint(err)
-        }
-        if pass?.activationState == PKPaymentPassActivationState.activated {
-            print("haha")
-        }
-        dismiss(animated: true) {
-            //Store the card success
-            if error == nil {
-                self.payLabel?.text = "Success"
-            }
-            print("closed")
-        }
-    }
 }
 
