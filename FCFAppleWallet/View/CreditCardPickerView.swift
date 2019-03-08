@@ -9,7 +9,7 @@
 import UIKit
 
 class CreditCardPickerView: UIView, UIScrollViewDelegate {
-
+    private let gap: CGFloat = padding * 2
     weak var scrollView: UIScrollView? {
         didSet {
             scrollView?.delegate = self
@@ -17,33 +17,18 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
     }
     weak var pageControl: UIPageControl?
 
-    public var cards: [CreditCard]?
-
-    private let gap: CGFloat = padding * 2
+    public var cards: [CreditCard]? {
+        didSet {
+            loadViews()
+            self.pageControl?.numberOfPages = cards?.count ?? 0
+            self.pageControl?.currentPage = 0
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        guard let _ = cards else { return }
-        
-        loadViews()
-        let one = CreditCard()
-        one.loadContent(cardName: "L. SMITH",
-                        cardNumber: "• • • •     • • • •     • • • •     7768",
-                        cardDate: "06/23",
-                        cardProvider: PaymentLogo.mastercard)
-        
-        let two = CreditCard()
-        two.loadContent(cardName: "T S. GIBSON",
-                        cardNumber: "• • • •     • • • •     • • • •     3321",
-                        cardDate: "06/23",
-                        cardProvider: PaymentLogo.visa)
-        let three = CreditCard()
-        three.loadContent(cardName: "J S. SWOFFORD", cardNumber: "• • • •     • • • • • •     21101", cardDate: "95", cardProvider: PaymentLogo.americanExpress)
-        cards = [one, two, three]
-        self.pageControl?.numberOfPages = cards?.count ?? 0
-        self.pageControl?.currentPage = 0
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -61,6 +46,8 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         self.scrollView = container
         
         let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = UIColor.fiservOrange.withAlphaComponent(0.3)
+        pageControl.currentPageIndicatorTintColor = .fiservOrange
         self.addSubview(pageControl)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
@@ -89,8 +76,8 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageIndex = round((scrollView.contentOffset.x - gap / 2) / self.frame.width)
-        pageControl?.currentPage = Int(pageIndex)
+        let pageIndex: Int = Int(round((scrollView.contentOffset.x - gap / 2) / self.frame.width))
+        pageControl?.currentPage = pageIndex
 
         let maximumHorizontalOffset: CGFloat = scrollView.contentSize.width - scrollView.frame.width
         let currentHorizontalOffset: CGFloat = scrollView.contentOffset.x - gap

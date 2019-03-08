@@ -22,6 +22,7 @@ class CreditCard: UIView {
     weak var logo: UIImageView?
     
     var backgroundView: UIView?
+    var cardProvider: PaymentLogo?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,6 +72,16 @@ class CreditCard: UIView {
         paywave.translatesAutoresizingMaskIntoConstraints = false
         paywave.bottomAnchor.constraint(equalTo: number.topAnchor, constant: -padding * 2).isActive = true
         paywave.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding * 2).isActive = true
+
+        let fiserv = UIImageView()
+        fiserv.image = UIImage(named: "FILogo")
+        fiserv.contentMode = .scaleAspectFit
+        self.addSubview(fiserv)
+        fiserv.translatesAutoresizingMaskIntoConstraints = false
+        fiserv.bottomAnchor.constraint(equalTo: paywave.topAnchor, constant: -padding).isActive = true
+        fiserv.trailingAnchor.constraint(equalTo: paywave.trailingAnchor).isActive = true
+        fiserv.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        fiserv.heightAnchor.constraint(equalTo: fiserv.widthAnchor, multiplier: 1.5/2).isActive = true
 
         let cardHolder = UILabel()
         cardHolder.textColor = UIColor.white.withAlphaComponent(0.8)
@@ -124,7 +135,7 @@ class CreditCard: UIView {
         self.cardNumber?.text = cardNumber
         self.cardDate?.text = cardDate
         self.expiryLabel?.text = cardProvider == .americanExpress ? "Since" : "Valid Thru"
-        
+        self.cardProvider = cardProvider
         switch cardProvider {
         case .mastercard:
             self.cardProviderLogo?.image = UIImage(named: "001-mastercard")
@@ -139,25 +150,37 @@ class CreditCard: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+
         let gradientLayer = CAGradientLayer()
-        // Set the size of the layer to be equal to size of the display.
         gradientLayer.frame = self.bounds
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0) // Top left corner.
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1) // Bottom right corner.
-        // Set an array of Core Graphics colors (.cgColor) to create the gradient.
-        // This example uses a Color Literal and a UIColor from RGB values.
-        gradientLayer.colors = [#colorLiteral(red: 0, green: 0.8416796875, blue: 0.3993097909, alpha: 0.8988045302).cgColor, #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor]
+
+        switch self.cardProvider {
+        case .mastercard?:
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+            gradientLayer.colors = [#colorLiteral(red: 0, green: 0.8416796875, blue: 0.3993097909, alpha: 0.8988045302).cgColor, #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor]
+        case .visa?:
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+            gradientLayer.colors = [#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1).cgColor, #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.8591609589).cgColor]
+        case .americanExpress?:
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+            gradientLayer.colors = [#colorLiteral(red: 0.6794917599, green: 0.7357005772, blue: 0.8173580266, alpha: 1).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
+        default:
+            return
+        }
         // Rasterize this static layer to improve app performance.
         gradientLayer.shouldRasterize = true
         gradientLayer.cornerRadius = padding * 2
-        // Apply the gradient to the backgroundGradientView.
         self.backgroundView?.layer.addSublayer(gradientLayer)
         
         let shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: padding * 2)
         self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.gray.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 5)//CGSizeMake(0.0f, 5.0f);
-        self.layer.shadowOpacity = 0.5
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOffset = CGSize(width: 5, height: 5)//CGSizeMake(0.0f, 5.0f);
+        self.layer.shadowOpacity = 0.7
+
         self.layer.shadowPath = shadowPath.cgPath
     }
 }
