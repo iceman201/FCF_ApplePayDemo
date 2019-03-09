@@ -17,6 +17,7 @@ class WalletViewController: UIViewController {
     var paymentNetwork: [PKPaymentNetwork]!
     let paymentRequest = PKPaymentRequest()
     let passLib = PKPassLibrary()
+    let kTransactionCell = "kTransactionCell"
 
     override func loadView() {
         super.loadView()
@@ -28,6 +29,8 @@ class WalletViewController: UIViewController {
         self.title = "Apply pay"
 
         let content = UITableView()
+        content.separatorStyle = .none
+        content.register(TransactionRecordCell.self, forCellReuseIdentifier: kTransactionCell)
         self.view.addSubview(content)
         content.translatesAutoresizingMaskIntoConstraints = false
         content.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
@@ -36,18 +39,21 @@ class WalletViewController: UIViewController {
         content.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         self.contentTable = content
 
-
         let headerView = UIView(frame: CGRect(origin: self.view.frame.origin, size: CGSize(width: self.view.frame.width, height: 333)))
         content.tableHeaderView = headerView
         content.tableHeaderView?.layoutIfNeeded()
         self.headerView = headerView
 
+        let creditCardPicker = CreditCardPickerView()
+        headerView.addSubview(creditCardPicker)
+        creditCardPicker.translatesAutoresizingMaskIntoConstraints = false
+        creditCardPicker.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
+        creditCardPicker.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
+        creditCardPicker.topAnchor.constraint(equalTo: headerView.topAnchor, constant: padding * 2).isActive = true
+        creditCardPicker.heightAnchor.constraint(equalTo: creditCardPicker.widthAnchor, multiplier: 2.0/1.0).isActive = true
+        self.creditCardPicker = creditCardPicker
 
-
-
-//        let divider = addDivider(on: headerView, topOf: creditCardPicker)
-
-        let pay = UIImageView(image: #imageLiteral(resourceName: "AddToWallet"), highlightedImage: nil)
+        let pay = UIImageView(image: #imageLiteral(resourceName: "AddToWallet"))
         let tapPay = UITapGestureRecognizer(target: self, action: #selector(MainViewController.tapOnPay))
         tapPay.numberOfTapsRequired = 1
         tapPay.numberOfTouchesRequired = 1
@@ -58,19 +64,16 @@ class WalletViewController: UIViewController {
         pay.translatesAutoresizingMaskIntoConstraints = false
         pay.heightAnchor.constraint(equalToConstant: 30).isActive = true
         pay.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        pay.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -padding).isActive = true
+        pay.topAnchor.constraint(equalTo: creditCardPicker.bottomAnchor, constant: padding).isActive = true
         pay.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -padding * 2).isActive = true
         self.payButton = pay
-
-        let creditCardPicker = CreditCardPickerView()
-        headerView.addSubview(creditCardPicker)
-        creditCardPicker.translatesAutoresizingMaskIntoConstraints = false
-        creditCardPicker.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
-        creditCardPicker.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
-        creditCardPicker.topAnchor.constraint(equalTo: headerView.topAnchor, constant: padding * 2).isActive = true
-        creditCardPicker.bottomAnchor.constraint(equalTo: pay.topAnchor, constant: -padding * 3).isActive = true
-        creditCardPicker.heightAnchor.constraint(equalTo: creditCardPicker.widthAnchor, multiplier: 2.0/1).isActive = true
-        self.creditCardPicker = creditCardPicker
+        
+        
+        // Bottom Anchor has to be given otherwise it cant calculate headerview high automatically
+        pay.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -padding * 2).isActive = true
+        
+        
+        
     }
 
     override func viewDidLoad() {
@@ -98,16 +101,10 @@ class WalletViewController: UIViewController {
         self.creditCardPicker?.cards = [three, one, two]
         self.paymentNetwork = [.amex, .chinaUnionPay, .discover, .masterCard, .visa]
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         guard let headerView = contentTable?.tableHeaderView else { return }
-
         let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         var headerFrame = headerView.frame
 
@@ -117,19 +114,8 @@ class WalletViewController: UIViewController {
             contentTable?.tableHeaderView = headerView
             contentTable?.layoutIfNeeded()
         }
-
+        
         headerView.translatesAutoresizingMaskIntoConstraints = true
-//
-//        self.payButton?.backgroundColor = .lightGray
-//        print("haha: \(haha)")
-//        if haha > CGFloat(230.0) {
-//            self.headerView?.backgroundColor = .gray
-//            self.headerView!.frame = CGRect(origin: self.view.frame.origin, size: CGSize(width: self.view.frame.width, height: haha))
-//            self.contentTable?.tableHeaderView = self.headerView
-//            print("\(self.headerView!.frame)")
-//            print("\(self.payButton!.frame)")
-//            print("\(self.payButton!.bounds)")
-//        }
     }
 
     @objc func tapOnPay() {
@@ -170,11 +156,12 @@ class WalletViewController: UIViewController {
     func canAddCardToWallet(primaryAccountId: String) -> Bool {
         return passLib.canAddPaymentPass(withPrimaryAccountIdentifier: primaryAccountId)
     }
-
 }
 
 extension WalletViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return padding * 8
+    }
 }
 
 extension WalletViewController: UITableViewDataSource {
@@ -186,12 +173,13 @@ extension WalletViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.backgroundColor = .white
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
+        
         return cell
 
     }
 }
+
 extension WalletViewController: PKAddPaymentPassViewControllerDelegate {
     func initProvisioning(_ paymentType: PKPaymentNetwork) {
         let passDetails = PKAddPaymentPassRequestConfiguration(encryptionScheme: PKEncryptionScheme.RSA_V2)
