@@ -65,12 +65,21 @@ class WalletViewController: UIViewController {
         pay.heightAnchor.constraint(equalToConstant: 30).isActive = true
         pay.widthAnchor.constraint(equalToConstant: 120).isActive = true
         pay.topAnchor.constraint(equalTo: creditCardPicker.bottomAnchor, constant: padding).isActive = true
-        pay.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -padding * 2).isActive = true
+        pay.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
         self.payButton = pay
+        
+        let payment = PaymentView()
+        payment.backgroundColor = .lightGray
+        headerView.addSubview(payment)
+        payment.translatesAutoresizingMaskIntoConstraints = false
+        payment.topAnchor.constraint(equalTo: pay.bottomAnchor, constant: padding).isActive = true
+        payment.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
+        payment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        payment.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
         
         // Bottom Anchor has to be given otherwise it cant calculate headerview high automatically
-        pay.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -padding * 2).isActive = true
+        payment.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -padding * 2).isActive = true
         
         
         

@@ -35,16 +35,19 @@ class TransactionRecordCell: UITableViewCell {
         let container = UIView()
         self.contentView.addSubview(container)
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.heightAnchor.constraint(equalTo: self.contentView.heightAnchor).isActive = true
-        container.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
+        container.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        container.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+        container.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+        container.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
         
         let top = UILabel()
         top.text = "hahahah"
         top.textColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
         container.addSubview(top)
         top.translatesAutoresizingMaskIntoConstraints = false
-        top.topAnchor.constraint(equalTo: divider.topAnchor, constant: padding).isActive = true
+        top.topAnchor.constraint(equalTo: container.topAnchor, constant: padding).isActive = true
         top.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: padding * 2).isActive = true
+        top.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
         
         let sub = UILabel()
         sub.textColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1).withAlphaComponent(0.5)
@@ -52,7 +55,21 @@ class TransactionRecordCell: UITableViewCell {
         container.addSubview(sub)
         sub.translatesAutoresizingMaskIntoConstraints = false
         sub.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: padding * 2).isActive = true
-        sub.topAnchor.constraint(equalTo: top.bottomAnchor, constant: padding).isActive = true
+        sub.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding).isActive = true
+        
+        let balance = UILabel()
+        balance.text = "gaga"
+        container.addSubview(balance)
+        balance.translatesAutoresizingMaskIntoConstraints = false
+        balance.topAnchor.constraint(equalTo: container.topAnchor, constant: padding).isActive = true
+        balance.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding * 2).isActive = true
+        
+        let date = UILabel()
+        date.text = "jhjh"
+        container.addSubview(date)
+        date.translatesAutoresizingMaskIntoConstraints = false
+        date.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        date.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
