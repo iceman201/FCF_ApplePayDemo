@@ -108,10 +108,10 @@ class WalletViewController: UIViewController {
         sectionSwitch.topAnchor.constraint(equalTo: payment.bottomAnchor).isActive = true
         sectionSwitch.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
         sectionSwitch.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
-        sectionSwitch.heightAnchor.constraint(equalToConstant: padding * 3).isActive = true
+        sectionSwitch.heightAnchor.constraint(equalToConstant: padding * 4).isActive = true
 
         // Bottom Anchor has to be given otherwise it cant calculate headerview high automatically
-        sectionSwitch.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        sectionSwitch.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -padding * 2).isActive = true
         
         
     }
