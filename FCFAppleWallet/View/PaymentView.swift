@@ -25,6 +25,7 @@ class PaymentView: UIView {
     func loadView() {
         let title = UILabel()
         title.textColor = .fiservOrange
+        title.font = UIFont.systemFont(ofSize: 12)
         self.addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false
         title.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -49,8 +50,8 @@ class PaymentView: UIView {
         }
         self.addSubview(container)
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.topAnchor.constraint(equalTo: title.bottomAnchor, constant: padding).isActive = true
-        container.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        container.topAnchor.constraint(equalTo: title.bottomAnchor).isActive = true
+        container.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding).isActive = true
         container.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         container.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
@@ -68,7 +69,7 @@ extension PaymentView: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,7 +82,6 @@ extension PaymentView: UICollectionViewDataSource {
         } else {
             cell.loadInfo(name: "haha", avatar: #imageLiteral(resourceName: "001-mastercard"))
         }
-        cell.backgroundColor = .cyan
         return cell
     }
 }
@@ -92,34 +92,34 @@ extension PaymentView: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: padding * 10, height: padding * 10)
+        return CGSize(width: padding * 9, height: padding * 9)
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return padding * 2
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return padding * 2
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 16, left: 0, bottom: 16, right: 0)
+        return UIEdgeInsets.init(top: padding, left: 0, bottom: 16, right: 0)
     }
 }
 
 // MARK: PaymentCollectionCell
 class PaymentContactCollectionCell: UICollectionViewCell {
     
-    private var nameLabel: UILabel?
-    private var avatar: UIImageView?
-    private var avatarCenterY: NSLayoutConstraint?
-    private var height: CGFloat = padding * 5
+    private weak var nameLabel: UILabel?
+    private weak var avatar: UIImageView?
+    private weak var avatarCenterY: NSLayoutConstraint?
+    private weak var height: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -131,26 +131,31 @@ class PaymentContactCollectionCell: UICollectionViewCell {
     }
     
     func loadView() {
-        self.layer.cornerRadius = defaultCornerRadius
+        self.layer.cornerRadius = defaultCornerRadius * 1.5
+        self.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        self.drawButtonShadow()
         
         let avatar = UIImageView()
         avatar.contentMode = .scaleAspectFit
-        avatar.backgroundColor = .brown
         self.addSubview(avatar)
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         let avatarCenter = avatar.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -padding)
         avatarCenter.isActive = true
         self.avatarCenterY = avatarCenter
-        avatar.heightAnchor.constraint(lessThanOrEqualToConstant: height).isActive = true
+        let heightAnchor = avatar.heightAnchor.constraint(equalToConstant: padding * 5)
+        heightAnchor.isActive = true
+        self.height = heightAnchor
         avatar.widthAnchor.constraint(equalTo: avatar.heightAnchor).isActive = true
         self.avatar = avatar
         
         let name = UILabel()
         name.font = UIFont.systemFont(ofSize: 12)
+        name.adjustsFontSizeToFitWidth = true
+        name.textColor = UIColor.fiservOrange
         self.addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
-        name.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: padding).isActive = true
+        name.topAnchor.constraint(equalTo: avatar.bottomAnchor).isActive = true
         name.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.nameLabel = name
     }
@@ -160,10 +165,21 @@ class PaymentContactCollectionCell: UICollectionViewCell {
         if let name = name {
             self.nameLabel?.text = name
         } else {
-            self.nameLabel?.removeFromSuperview()
+            self.nameLabel?.isHidden = true
             self.avatarCenterY?.constant = 0
-            self.avatar?.heightAnchor.constraint(lessThanOrEqualToConstant: padding * 3.5).isActive = true
+            self.height?.constant = padding * 3
         }
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.avatar?.image = nil
+        self.nameLabel?.text = nil
+        self.nameLabel?.isHidden = false
+        self.avatarCenterY?.constant = -padding
+        self.height?.constant = padding * 5
+        self.avatar?.widthAnchor.constraint(equalTo: self.avatar!.heightAnchor).isActive = true
+        self.layoutIfNeeded()
     }
 }
 

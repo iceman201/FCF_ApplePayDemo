@@ -95,16 +95,17 @@ class WalletViewController: UIViewController {
         payment.sectionTitle?.text = "Send Money to"
         headerView.addSubview(payment)
         payment.translatesAutoresizingMaskIntoConstraints = false
-        payment.topAnchor.constraint(equalTo: pay.bottomAnchor, constant: padding * 2).isActive = true
+        payment.topAnchor.constraint(equalTo: pay.bottomAnchor, constant: padding * 3).isActive = true
         payment.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
         payment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        payment.heightAnchor.constraint(equalToConstant: padding * 13).isActive = true
+        payment.heightAnchor.constraint(equalToConstant: padding * 15).isActive = true
         
         let sectionSwitch = UISegmentedControl()
         sectionSwitch.backgroundColor = .fiservOrange
+        
         headerView.addSubview(sectionSwitch)
         sectionSwitch.translatesAutoresizingMaskIntoConstraints = false
-        sectionSwitch.topAnchor.constraint(equalTo: payment.bottomAnchor, constant: padding * 2).isActive = true
+        sectionSwitch.topAnchor.constraint(equalTo: payment.bottomAnchor).isActive = true
         sectionSwitch.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
         sectionSwitch.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
         sectionSwitch.heightAnchor.constraint(equalToConstant: padding * 3).isActive = true
@@ -217,7 +218,7 @@ extension WalletViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
-        cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800")
+        cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)
         return cell
 
     }
