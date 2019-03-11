@@ -17,6 +17,7 @@
 		05F7C8D9222FF75400C4E499 /* FontAwesome5Brands-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 05F7C8D7222FF5C300C4E499 /* FontAwesome5Brands-Regular-400.otf */; };
 		05F7C8DA222FF75800C4E499 /* Paymentfont-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05F7C8D5222FDD8D00C4E499 /* Paymentfont-webfont.ttf */; };
 		4B7E68654601711ECD439E83 /* Pods_FCFAppleWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D27936EED2EE691A7F5EC /* Pods_FCFAppleWallet.framework */; };
+		EA1C535F2235EAD20091CC4F /* MockCreditCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C535E2235EAD20091CC4F /* MockCreditCardData.swift */; };
 		EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6521BF6286003831C3 /* AppDelegate.swift */; };
 		EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6721BF6286003831C3 /* MainViewController.swift */; };
 		EA8CCE6B21BF6286003831C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA8CCE6921BF6286003831C3 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		05F7C8D7222FF5C300C4E499 /* FontAwesome5Brands-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontAwesome5Brands-Regular-400.otf"; sourceTree = "<group>"; };
 		578F9471F7258DFCFB57E050 /* Pods-FCFAppleWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FCFAppleWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FCFAppleWallet/Pods-FCFAppleWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		8101AB4E0577777D0896D9D8 /* Pods-FCFAppleWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FCFAppleWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-FCFAppleWallet/Pods-FCFAppleWallet.release.xcconfig"; sourceTree = "<group>"; };
+		EA1C535E2235EAD20091CC4F /* MockCreditCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCreditCardData.swift; sourceTree = "<group>"; };
 		EA8CCE6221BF6286003831C3 /* FCFAppleWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCFAppleWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA8CCE6521BF6286003831C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA8CCE6721BF6286003831C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				05E1AC14222D3E0000A9895A /* ParseFont.swift */,
+				EA1C535E2235EAD20091CC4F /* MockCreditCardData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA1C535F2235EAD20091CC4F /* MockCreditCardData.swift in Sources */,
 				05E1AC18222D3E8B00A9895A /* EXTFont.swift in Sources */,
 				058A4A6222350F7D00D6CBC8 /* PaymentView.swift in Sources */,
 				EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */,

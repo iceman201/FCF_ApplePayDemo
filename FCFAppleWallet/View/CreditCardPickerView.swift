@@ -59,7 +59,10 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        loadCreditCard(cards: self.cards!)
+        if let card = self.cards {
+            loadCreditCard(cards: card)
+        }
+
     }
 
     func loadCreditCard(cards: [CreditCard]) {

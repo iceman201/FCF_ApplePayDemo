@@ -43,9 +43,23 @@ extension UIColor {
     }
 }
 
+extension UIView {
+    func drawButtonShadow() {
+        let shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: defaultCornerRadius)
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOffset = CGSize(width: 3, height: 3)//CGSizeMake(0.0f, 5.0f);
+        self.layer.shadowOpacity = 0.7
+        self.layer.shadowPath = shadowPath.cgPath
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+    }
+}
+
 
 // MARK: UI Style sheet
 let padding: CGFloat = 8
+let defaultCornerRadius: CGFloat = 6
 
 extension UIColor {
     open class var fiservOrange: UIColor {
