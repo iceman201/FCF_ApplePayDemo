@@ -62,25 +62,55 @@ class WalletViewController: UIViewController {
         pay.isUserInteractionEnabled = true
         pay.addGestureRecognizer(tapPay)
         pay.translatesAutoresizingMaskIntoConstraints = false
-        pay.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        pay.heightAnchor.constraint(equalToConstant: 35).isActive = true
         pay.widthAnchor.constraint(equalToConstant: 120).isActive = true
         pay.topAnchor.constraint(equalTo: creditCardPicker.bottomAnchor, constant: padding).isActive = true
         pay.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
+        pay.layoutIfNeeded()
+        pay.drawButtonShadow()
         self.payButton = pay
+
+        let due = UIButton()
+        due.setTitle("Next Payment Due", for: .normal)
+        due.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        due.contentEdgeInsets = UIEdgeInsets(top: 0, left: padding * 1.5, bottom: 0, right: padding * 1.5)
+        due.setTitleColor(.fiservOrange, for: .normal)
+        due.backgroundColor = .white
+        due.layer.borderWidth = 1
+        due.layer.borderColor = UIColor.fiservOrange.cgColor
+        due.layer.cornerRadius = defaultCornerRadius
+        due.addTarget(self, action: #selector(WalletViewController.tapOnDuePayment), for: .touchUpInside)
+        headerView.addSubview(due)
+        due.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            due.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2),
+            due.topAnchor.constraint(equalTo: pay.topAnchor),
+            due.heightAnchor.constraint(equalTo: pay.heightAnchor)
+        ])
+        due.layoutIfNeeded()
+        due.drawButtonShadow()
+
         
         let payment = PaymentView()
-        payment.backgroundColor = .lightGray
+        payment.sectionTitle?.text = "Send Money to"
         headerView.addSubview(payment)
         payment.translatesAutoresizingMaskIntoConstraints = false
-        payment.topAnchor.constraint(equalTo: pay.bottomAnchor, constant: padding).isActive = true
+        payment.topAnchor.constraint(equalTo: pay.bottomAnchor, constant: padding * 2).isActive = true
         payment.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
         payment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        payment.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        payment.heightAnchor.constraint(equalToConstant: padding * 13).isActive = true
         
-        
+        let sectionSwitch = UISegmentedControl()
+        sectionSwitch.backgroundColor = .fiservOrange
+        headerView.addSubview(sectionSwitch)
+        sectionSwitch.translatesAutoresizingMaskIntoConstraints = false
+        sectionSwitch.topAnchor.constraint(equalTo: payment.bottomAnchor, constant: padding * 2).isActive = true
+        sectionSwitch.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
+        sectionSwitch.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
+        sectionSwitch.heightAnchor.constraint(equalToConstant: padding * 3).isActive = true
+
         // Bottom Anchor has to be given otherwise it cant calculate headerview high automatically
-        payment.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -padding * 2).isActive = true
-        
+        sectionSwitch.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
         
         
     }
@@ -125,6 +155,10 @@ class WalletViewController: UIViewController {
         }
         
         headerView.translatesAutoresizingMaskIntoConstraints = true
+    }
+
+    @objc func tapOnDuePayment() {
+
     }
 
     @objc func tapOnPay() {
@@ -183,7 +217,7 @@ extension WalletViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
-        
+        cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800")
         return cell
 
     }
@@ -202,7 +236,11 @@ extension WalletViewController: PKAddPaymentPassViewControllerDelegate {
         self.present(passViewController!, animated: true, completion: nil)
     }
 
-    func addPaymentPassViewController(_ controller: PKAddPaymentPassViewController, generateRequestWithCertificateChain certificates: [Data], nonce: Data, nonceSignature: Data, completionHandler handler: @escaping (PKAddPaymentPassRequest) -> Void) {
+    func addPaymentPassViewController(_ controller: PKAddPaymentPassViewController,
+                                      generateRequestWithCertificateChain certificates: [Data],
+                                      nonce: Data,
+                                      nonceSignature: Data,
+                                      completionHandler handler: @escaping (PKAddPaymentPassRequest) -> Void) {
         /* Information we need to send to DCIS */
         let _ = certificates
         let _ = nonce
