@@ -100,9 +100,9 @@ class WalletViewController: UIViewController {
         payment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         payment.heightAnchor.constraint(equalToConstant: padding * 15).isActive = true
         
-        let sectionSwitch = UISegmentedControl()
+        let sectionSwitch = TransactionSegmentControl()
         sectionSwitch.backgroundColor = .fiservOrange
-        
+        sectionSwitch.segmentTitles = ["Balances", "Transaction"]
         headerView.addSubview(sectionSwitch)
         sectionSwitch.translatesAutoresizingMaskIntoConstraints = false
         sectionSwitch.topAnchor.constraint(equalTo: payment.bottomAnchor).isActive = true
@@ -218,9 +218,12 @@ extension WalletViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
-        cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)
+        cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
+        cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
+        cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
+        cell.topLineLabel.text = "Team Lunch"
+        cell.subLineLabel.text = "Auckland, New Zealand"
         return cell
-
     }
 }
 
