@@ -45,7 +45,7 @@ class TransactionRecordCell: UITableViewCell {
         
         let top = UILabel()
         top.text = "hahahah"
-        top.textColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
+        top.textColor = .white
         container.addSubview(top)
         top.translatesAutoresizingMaskIntoConstraints = false
         top.topAnchor.constraint(equalTo: container.topAnchor, constant: padding).isActive = true
@@ -53,7 +53,7 @@ class TransactionRecordCell: UITableViewCell {
         top.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
         
         let sub = UILabel()
-        sub.textColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1).withAlphaComponent(0.5)
+        sub.textColor = UIColor.white.withAlphaComponent(0.6)
         sub.text = "lalala"
         container.addSubview(sub)
         sub.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +62,7 @@ class TransactionRecordCell: UITableViewCell {
         
         let balance = UILabel()
         balance.text = "gaga"
+        balance.textColor = .white
         container.addSubview(balance)
         balance.translatesAutoresizingMaskIntoConstraints = false
         balance.topAnchor.constraint(equalTo: container.topAnchor, constant: padding).isActive = true
@@ -69,6 +70,7 @@ class TransactionRecordCell: UITableViewCell {
         
         let date = UILabel()
         date.text = "jhjh"
+        date.textColor = UIColor.white.withAlphaComponent(0.6)
         container.addSubview(date)
         date.translatesAutoresizingMaskIntoConstraints = false
         date.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding).isActive = true
