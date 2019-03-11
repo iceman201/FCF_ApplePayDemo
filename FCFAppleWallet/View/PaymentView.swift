@@ -109,7 +109,7 @@ extension PaymentView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: padding, left: 0, bottom: 16, right: 0)
+        return UIEdgeInsets.init(top: padding, left: padding, bottom: padding, right: 0)
     }
 }
 
@@ -133,7 +133,6 @@ class PaymentContactCollectionCell: UICollectionViewCell {
     func loadView() {
         self.layer.cornerRadius = defaultCornerRadius * 1.5
         self.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        self.drawButtonShadow()
         
         let avatar = UIImageView()
         avatar.contentMode = .scaleAspectFit
@@ -165,6 +164,7 @@ class PaymentContactCollectionCell: UICollectionViewCell {
         if let name = name {
             self.nameLabel?.text = name
         } else {
+            self.drawButtonShadow()
             self.nameLabel?.isHidden = true
             self.avatarCenterY?.constant = 0
             self.height?.constant = padding * 3
@@ -175,6 +175,7 @@ class PaymentContactCollectionCell: UICollectionViewCell {
         super.prepareForReuse()
         self.avatar?.image = nil
         self.nameLabel?.text = nil
+        self.layer.shadowOpacity = 0.0
         self.nameLabel?.isHidden = false
         self.avatarCenterY?.constant = -padding
         self.height?.constant = padding * 5
