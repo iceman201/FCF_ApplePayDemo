@@ -9,6 +9,12 @@
 import UIKit
 import PassKit
 
+fileprivate enum WalletViewSectionType {
+    case transaction
+    case balance
+    case statement
+}
+
 class WalletViewController: UIViewController {
     weak var contentTable: UITableView?
     weak var creditCardPicker: CreditCardPickerView?
@@ -18,6 +24,8 @@ class WalletViewController: UIViewController {
     let paymentRequest = PKPaymentRequest()
     let passLib = PKPassLibrary()
     let kTransactionCell = "kTransactionCell"
+
+    fileprivate var sectionType: WalletViewSectionType? = .balance
 
     override func loadView() {
         super.loadView()
@@ -100,20 +108,18 @@ class WalletViewController: UIViewController {
         payment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         payment.heightAnchor.constraint(equalToConstant: padding * 15).isActive = true
         
-        let sectionSwitch = TransactionSegmentControl()
-        sectionSwitch.backgroundColor = .fiservOrange
-        sectionSwitch.segmentTitles = ["Balances", "Transaction"]
+        let sectionSwitch = TransactionSegmentControl(frame: .zero, segmentColor: UIColor(displayP3Red: 243.0/255.0, green: 195.0/255.0, blue: 117.0/255.0, alpha: 1))
+        sectionSwitch.segmentTitles = ["Balances", "Transaction", "Statement"]
         headerView.addSubview(sectionSwitch)
         sectionSwitch.translatesAutoresizingMaskIntoConstraints = false
         sectionSwitch.topAnchor.constraint(equalTo: payment.bottomAnchor).isActive = true
         sectionSwitch.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
         sectionSwitch.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
-        sectionSwitch.heightAnchor.constraint(equalToConstant: padding * 4).isActive = true
+        sectionSwitch.heightAnchor.constraint(equalToConstant: padding * 5).isActive = true
 
         // Bottom Anchor has to be given otherwise it cant calculate headerview high automatically
-        sectionSwitch.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -padding * 2).isActive = true
-        
-        
+        sectionSwitch.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        sectionSwitch.addTarget(self, action: #selector(WalletViewController.tapOnSegment), for: .valueChanged)
     }
 
     override func viewDidLoad() {
@@ -154,8 +160,20 @@ class WalletViewController: UIViewController {
             contentTable?.tableHeaderView = headerView
             contentTable?.layoutIfNeeded()
         }
-        
         headerView.translatesAutoresizingMaskIntoConstraints = true
+    }
+
+    @objc func tapOnSegment(_ sender: TransactionSegmentControl) {
+        switch sender.selectedIndex {
+        case 0:
+            sectionType = .balance
+        case 1:
+            sectionType = .transaction
+        case 2:
+            sectionType = .statement
+        default:
+            break
+        }
     }
 
     @objc func tapOnDuePayment() {

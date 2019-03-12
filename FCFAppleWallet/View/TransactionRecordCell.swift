@@ -23,17 +23,7 @@ class TransactionRecordCell: UITableViewCell {
     
     fileprivate func loadView() {
         self.selectionStyle = .none
-        
-        let divider = UIView()
-        divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
-        self.addSubview(divider)
-        divider.translatesAutoresizingMaskIntoConstraints = false
-        divider.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        divider.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding * 2).isActive = true
-        divider.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding * 2).isActive = true
-        
-        
+
         let container = UIView()
         self.contentView.addSubview(container)
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -54,10 +44,11 @@ class TransactionRecordCell: UITableViewCell {
         
         let sub = UILabel()
         sub.textColor = UIColor.white.withAlphaComponent(0.6)
+        sub.font = UIFont.systemFont(ofSize: 12)
         container.addSubview(sub)
         sub.translatesAutoresizingMaskIntoConstraints = false
         sub.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: padding).isActive = true
-        sub.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding).isActive = true
+        sub.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding  * 1.5).isActive = true
         self.subLineLabel = sub
         
         let balance = UILabel()
@@ -69,12 +60,22 @@ class TransactionRecordCell: UITableViewCell {
         self.balanceLabel = balance
         
         let date = UILabel()
+        date.font = UIFont.systemFont(ofSize: 12)
         date.textColor = UIColor.white.withAlphaComponent(0.6)
         container.addSubview(date)
         date.translatesAutoresizingMaskIntoConstraints = false
         date.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding).isActive = true
-        date.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding).isActive = true
+        date.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding * 1.5).isActive = true
         self.dateLineLabel = date
+
+        let divider = UIView()
+        divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        self.addSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding * 2).isActive = true
+        divider.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding * 2).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
