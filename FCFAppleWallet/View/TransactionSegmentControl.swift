@@ -14,72 +14,131 @@ class TransactionSegmentControl: UIControl {
             setSegmentControl()
         }
     }
-    
-    weak var seletor: UIView!
-    
-    private var segmentButtons = [UIButton]()
+    var selectedIndex: Int = 0
+    var segmentBackgroundColor: UIColor?
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        loadView()
+    private weak var segmentSeletor: UIView!
+    private weak var bottomEdge: UIView!
+
+    private var segmentColor: UIColor
+    private var segmentSelectedColor: UIColor = .white
+    private var segmentUnselectedColor: UIColor = .fiservOrange
+
+    private var segmentButtons = [UIButton]()
+    private let cornerSize = CGSize(width: padding, height: padding)
+    private let edgeCornerSize = CGSize(width: padding * 3, height: padding * 3)
+    private var shapePath: CGPath? {
+        didSet {
+            if let seletor = self.segmentSeletor {
+                let rectShape = CAShapeLayer()
+                rectShape.bounds = seletor.frame
+                rectShape.position = seletor.center
+                rectShape.path = shapePath
+                seletor.layer.backgroundColor = segmentColor.cgColor
+                seletor.layer.mask = rectShape
+            }
+        }
     }
-    
+    private var contentShapePath: CGPath? {
+        didSet {
+            if let edge = self.bottomEdge {
+                let rectShape = CAShapeLayer()
+                rectShape.bounds = edge.frame
+                rectShape.position = edge.center
+                rectShape.path = contentShapePath
+                edge.layer.backgroundColor = segmentColor.cgColor
+                edge.layer.mask = rectShape
+            }
+        }
+    }
+
+    init(frame: CGRect, segmentColor: UIColor) {
+        self.segmentColor = segmentColor
+        super.init(frame: frame)
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func loadView() {
-        
-    }
-    
+
     override func draw(_ rect: CGRect) {
-        self.layer.cornerRadius = frame.height/2
+        super.draw(rect)
+        self.contentShapePath = UIBezierPath(roundedRect: self.bottomEdge.bounds, byRoundingCorners: [.topRight], cornerRadii: edgeCornerSize).cgPath
+        self.shapePath = UIBezierPath(roundedRect: self.segmentSeletor.bounds, byRoundingCorners: [.topRight], cornerRadii: cornerSize).cgPath
     }
     
     func setSegmentControl() {
-        
         segmentButtons.removeAll()
         subviews.forEach({ $0.removeFromSuperview() })
         self.segmentTitles?.forEach({ (title) in
             let button = UIButton()
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
             button.setTitle(title, for: .normal)
+            button.setTitleColor(segmentUnselectedColor, for: .normal)
+            button.contentHorizontalAlignment = .center
+            button.contentVerticalAlignment = .bottom
             button.addTarget(self, action: #selector(TransactionSegmentControl.tapSegmentButton), for: .touchUpInside)
             segmentButtons.append(button)
         })
-        
-        self.layoutIfNeeded()
+        segmentButtons.first?.setTitleColor(segmentSelectedColor, for: .normal)
         let seletorWidth = frame.width / CGFloat(segmentButtons.count)
         let segmentSeletor = UIView(frame: CGRect(x: 0, y: 0, width: seletorWidth, height: frame.height))
-        segmentSeletor.layer.cornerRadius = frame.height / 2
-        segmentSeletor.backgroundColor = .blue
         self.addSubview(segmentSeletor)
-        self.seletor = segmentSeletor
-        
+        self.segmentSeletor = segmentSeletor
+
         let segmentStack = UIStackView(arrangedSubviews: segmentButtons)
         segmentStack.axis = .horizontal
         segmentStack.alignment = .fill
-        segmentStack.distribution = .fillProportionally
+        segmentStack.distribution = .fillEqually
         self.addSubview(segmentStack)
         segmentStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             segmentStack.topAnchor.constraint(equalTo: self.topAnchor),
             segmentStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             segmentStack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            segmentStack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            segmentStack.heightAnchor.constraint(equalToConstant: padding * 4)
         ])
+
+        let bottomEdge = UIView()
+        bottomEdge.backgroundColor = segmentColor
+        self.addSubview(bottomEdge)
+        bottomEdge.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomEdge.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            bottomEdge.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            bottomEdge.topAnchor.constraint(equalTo: segmentStack.bottomAnchor),
+            bottomEdge.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+        self.bottomEdge = bottomEdge
     }
     
     @objc func tapSegmentButton(button: UIButton) {
         for (i, eachBtn) in segmentButtons.enumerated() {
-            eachBtn.setTitleColor(.green, for: .normal)
+            eachBtn.setTitleColor(segmentUnselectedColor, for: .normal)
             if eachBtn == button {
                 let selectorStartPoint = frame.width / CGFloat(segmentButtons.count) * CGFloat(i)
-                eachBtn.setTitleColor(.black, for: .normal)
+                eachBtn.setTitleColor(segmentSelectedColor, for: .normal)
+                eachBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
+                selectedIndex = i
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.seletor.frame.origin.x = selectorStartPoint
+                    self.segmentSeletor.frame.origin.x = selectorStartPoint
+                })
+                UIView.animate(withDuration: 0.5, animations: {
+                    switch i {
+                    case 0: // First segment
+                        self.shapePath = UIBezierPath(roundedRect: self.segmentSeletor.bounds, byRoundingCorners: [.topRight], cornerRadii: self.cornerSize).cgPath
+                        self.contentShapePath = UIBezierPath(roundedRect: self.bottomEdge.bounds, byRoundingCorners: [.topRight], cornerRadii: self.edgeCornerSize).cgPath
+                    case self.segmentButtons.count - 1: // Last segment
+                        self.shapePath = UIBezierPath(roundedRect: self.segmentSeletor.bounds, byRoundingCorners: [.topLeft], cornerRadii: self.cornerSize).cgPath
+                         self.contentShapePath = UIBezierPath(roundedRect: self.bottomEdge.bounds, byRoundingCorners: [.topLeft], cornerRadii: self.edgeCornerSize).cgPath
+                    default:
+                        self.shapePath = UIBezierPath(roundedRect: self.segmentSeletor.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: self.cornerSize).cgPath
+                        self.contentShapePath = UIBezierPath(roundedRect: self.bottomEdge.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: self.edgeCornerSize).cgPath
+                    }
                 })
             }
         }
+        sendActions(for: .valueChanged)
     }
     
     override func layoutSubviews() {
