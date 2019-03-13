@@ -120,7 +120,7 @@ class TransactionSegmentControl: UIControl {
                 eachBtn.setTitleColor(segmentSelectedColor, for: .normal)
                 eachBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
                 selectedIndex = i
-                UIView.animate(withDuration: 0.3, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     self.segmentSeletor.frame.origin.x = selectorStartPoint
                 })
                 UIView.animate(withDuration: 0.5, animations: {

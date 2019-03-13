@@ -23,9 +23,17 @@ class WalletViewController: UIViewController {
     var paymentNetwork: [PKPaymentNetwork]!
     let paymentRequest = PKPaymentRequest()
     let passLib = PKPassLibrary()
-    let kTransactionCell = "kTransactionCell"
 
-    fileprivate var sectionType: WalletViewSectionType? = .balance
+    let kTransactionCell = "kTransactionCell"
+    let kBalanceCell = "kBalanceCell"
+
+    let backgroundColor: UIColor = UIColor(displayP3Red: 249.0/255.0, green: 247.0/255.0, blue: 235.0/255.0, alpha: 1)
+
+    fileprivate var sectionType: WalletViewSectionType = .balance {
+        didSet {
+            self.contentTable?.reloadData()
+        }
+    }
 
     override func loadView() {
         super.loadView()
@@ -33,12 +41,15 @@ class WalletViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.barTintColor = backgroundColor
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.fiservOrange]
         self.title = "Apply pay"
 
         let content = UITableView()
         content.separatorStyle = .none
+        content.backgroundColor = backgroundColor
         content.register(TransactionRecordCell.self, forCellReuseIdentifier: kTransactionCell)
+        content.register(BalanceCell.self, forCellReuseIdentifier: kBalanceCell)
         self.view.addSubview(content)
         content.translatesAutoresizingMaskIntoConstraints = false
         content.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
@@ -53,6 +64,7 @@ class WalletViewController: UIViewController {
         self.headerView = headerView
 
         let creditCardPicker = CreditCardPickerView()
+        creditCardPicker.cardBalances = [53630.0, 3230.0, 980.0]
         headerView.addSubview(creditCardPicker)
         creditCardPicker.translatesAutoresizingMaskIntoConstraints = false
         creditCardPicker.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
@@ -72,7 +84,7 @@ class WalletViewController: UIViewController {
         pay.translatesAutoresizingMaskIntoConstraints = false
         pay.heightAnchor.constraint(equalToConstant: 35).isActive = true
         pay.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        pay.topAnchor.constraint(equalTo: creditCardPicker.bottomAnchor, constant: padding).isActive = true
+        pay.topAnchor.constraint(equalTo: creditCardPicker.bottomAnchor, constant: padding * 2).isActive = true
         pay.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
         pay.layoutIfNeeded()
         pay.drawButtonShadow()
@@ -91,25 +103,33 @@ class WalletViewController: UIViewController {
         headerView.addSubview(due)
         due.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            due.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2),
-            due.topAnchor.constraint(equalTo: pay.topAnchor),
+            due.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2),
+            due.topAnchor.constraint(equalTo: pay.bottomAnchor, constant: padding),
             due.heightAnchor.constraint(equalTo: pay.heightAnchor)
         ])
         due.layoutIfNeeded()
         due.drawButtonShadow()
 
-        
+        let creditCardBalance = CreditCardBalanceView()
+        creditCardBalance.backgroundColor = .cyan
+        headerView.addSubview(creditCardBalance)
+        creditCardBalance.translatesAutoresizingMaskIntoConstraints = false
+        creditCardBalance.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
+        creditCardBalance.topAnchor.constraint(equalTo: creditCardPicker.bottomAnchor, constant: padding * 2).isActive = true
+        creditCardBalance.bottomAnchor.constraint(equalTo: due.bottomAnchor, constant: 0).isActive = true
+        creditCardBalance.widthAnchor.constraint(equalTo: creditCardBalance.heightAnchor, multiplier: 2/1).isActive = true
+
         let payment = PaymentView()
         payment.sectionTitle?.text = "Send Money to"
         headerView.addSubview(payment)
         payment.translatesAutoresizingMaskIntoConstraints = false
-        payment.topAnchor.constraint(equalTo: pay.bottomAnchor, constant: padding * 3).isActive = true
+        payment.topAnchor.constraint(equalTo: due.bottomAnchor, constant: padding * 2).isActive = true
         payment.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
         payment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         payment.heightAnchor.constraint(equalToConstant: padding * 15).isActive = true
         
         let sectionSwitch = TransactionSegmentControl(frame: .zero, segmentColor: UIColor(displayP3Red: 243.0/255.0, green: 195.0/255.0, blue: 117.0/255.0, alpha: 1))
-        sectionSwitch.segmentTitles = ["Balances", "Transaction", "Statement"]
+        sectionSwitch.segmentTitles = ["Details", "Transaction", "Statement"]
         headerView.addSubview(sectionSwitch)
         sectionSwitch.translatesAutoresizingMaskIntoConstraints = false
         sectionSwitch.topAnchor.constraint(equalTo: payment.bottomAnchor).isActive = true
@@ -222,7 +242,15 @@ class WalletViewController: UIViewController {
 
 extension WalletViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return padding * 8
+        switch self.sectionType {
+        case .balance:
+            return 320
+        case .statement:
+            return 120
+        case .transaction:
+            return padding * 8
+        }
+
     }
 }
 
@@ -231,17 +259,47 @@ extension WalletViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        switch self.sectionType {
+        case .balance:
+            return 1
+        case .statement:
+            return 1
+        case .transaction:
+            return 30
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
-        cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
-        cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
-        cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
-        cell.topLineLabel.text = "Team Lunch"
-        cell.subLineLabel.text = "Auckland, New Zealand"
-        return cell
+
+        switch self.sectionType {
+        case WalletViewSectionType.balance:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: kBalanceCell, for: indexPath) as? BalanceCell else { return UITableViewCell() }
+//            cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
+//            cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
+//            cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
+//            cell.topLineLabel.text = "Team Lunch"
+//            cell.subLineLabel.text = "Auckland, New Zealand"
+            return cell
+        case WalletViewSectionType.statement:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
+            cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
+            cell.backgroundColor = backgroundColor
+            cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
+            cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
+            cell.topLineLabel.text = "Team Lunch"
+            cell.subLineLabel.text = "Auckland, New Zealand"
+            return cell
+        case WalletViewSectionType.transaction:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
+            cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
+            cell.backgroundColor = backgroundColor
+            cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
+            cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
+            cell.topLineLabel.text = "Team Lunch"
+            cell.subLineLabel.text = "Auckland, New Zealand"
+            return cell
+        }
+
     }
 }
 
