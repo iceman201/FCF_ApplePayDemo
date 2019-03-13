@@ -17,6 +17,17 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
     }
     weak var pageControl: UIPageControl?
 
+    var cardBalances: [Float] = [0.00]
+
+    private var balanceLabel: UILabel?
+    private var currentBalance: Float = 0.00 {
+        didSet {
+            let sign = NSMutableAttributedString(string: "-\(FontAwesome.dollarSign.rawValue)", attributes: [NSAttributedString.Key.font : UIFont.fontAwesome(ofSize: 11)])
+            sign.append(NSMutableAttributedString(string: " \(self.currentBalance)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: .bold)]))
+            self.balanceLabel?.attributedText = sign
+        }
+    }
+
     public var cards: [CreditCard]? {
         didSet {
             loadViews()
@@ -40,10 +51,20 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         self.addSubview(container)
         container.translatesAutoresizingMaskIntoConstraints = false
         container.topAnchor.constraint(equalTo: self.topAnchor, constant: padding).isActive = true
-        container.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding * 2).isActive = true
+//        container.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding * 2).isActive = true
+        container.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -padding * 3).isActive = true
         container.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding).isActive = true
         container.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding).isActive = true
         self.scrollView = container
+
+        let balance = UILabel()
+        balance.textColor = .fiservOrange
+        self.addSubview(balance)
+        balance.translatesAutoresizingMaskIntoConstraints = false
+        balance.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        balance.topAnchor.constraint(equalTo: container.bottomAnchor, constant: padding).isActive = true
+        self.balanceLabel = balance
+        self.currentBalance = self.cardBalances.first ?? 0.00
         
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = UIColor.fiservOrange.withAlphaComponent(0.3)
@@ -52,8 +73,9 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
         pageControl.heightAnchor.constraint(equalToConstant: padding).isActive = true
-        pageControl.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        pageControl.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        pageControl.topAnchor.constraint(equalTo: container.bottomAnchor, constant: padding).isActive = true
+        pageControl.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//        pageControl.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.pageControl = pageControl
     }
 
@@ -62,7 +84,6 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         if let card = self.cards {
             loadCreditCard(cards: card)
         }
-
     }
 
     func loadCreditCard(cards: [CreditCard]) {
@@ -80,7 +101,9 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex: Int = Int(round((scrollView.contentOffset.x - gap / 2) / self.frame.width))
-        pageControl?.currentPage = pageIndex
+        self.pageControl?.currentPage = pageIndex
+
+        self.currentBalance = self.cardBalances[pageIndex]
 
         let maximumHorizontalOffset: CGFloat = scrollView.contentSize.width - scrollView.frame.width
         let currentHorizontalOffset: CGFloat = scrollView.contentOffset.x - gap
