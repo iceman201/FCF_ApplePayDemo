@@ -166,6 +166,7 @@ class WalletViewController: UIViewController {
                           cardProvider: PaymentLogo.americanExpress)
         self.creditCardPicker?.cards = [three, one, two]
         self.paymentNetwork = [.amex, .chinaUnionPay, .discover, .masterCard, .visa]
+        self.creditCardPicker?.balanceLabel?.counting(fromValue: 0, toValue: 3000, withDuration: 5, animationType: .EaseIn, counterType: .Float)
     }
     
     override func viewDidLayoutSubviews() {
