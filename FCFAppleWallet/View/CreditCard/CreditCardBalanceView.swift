@@ -43,13 +43,24 @@ class CreditCardBalanceView: UIView {
                                             startAngle: -1.2*CGFloat.pi,
                                             endAngle: -1.8*CGFloat.pi,
                                             clockwise: true)
-
+            let trackLayer = CAShapeLayer()
+            trackLayer.path = circularPath.cgPath
+            trackLayer.strokeColor = UIColor.lightGray.cgColor
+            trackLayer.lineWidth = padding
+            trackLayer.fillColor = UIColor.clear.cgColor
+            trackLayer.lineCap = .round
+            self.layer.addSublayer(trackLayer)
+            
+            
             shapeLayer.path = circularPath.cgPath
             shapeLayer.strokeColor = UIColor.fiservOrange.cgColor
-            shapeLayer.lineWidth = padding / 2
+            shapeLayer.lineWidth = padding
+            shapeLayer.fillColor = UIColor.clear.cgColor
+            shapeLayer.lineCap = .round
             shapeLayer.strokeEnd = 0
 
             self.layer.addSublayer(shapeLayer)
+            
             self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CreditCardBalanceView.tapOnIt)))
         }
     }

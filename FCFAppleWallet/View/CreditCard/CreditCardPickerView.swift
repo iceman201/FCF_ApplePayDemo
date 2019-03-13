@@ -19,7 +19,7 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
 
     var cardBalances: [Float] = [0.00]
 
-    private var balanceLabel: UILabel?
+    var balanceLabel: BalanceLabel?
     private var currentBalance: Float = 0.00 {
         didSet {
             let sign = NSMutableAttributedString(string: "-\(FontAwesome.dollarSign.rawValue)", attributes: [NSAttributedString.Key.font : UIFont.fontAwesome(ofSize: 11)])
@@ -57,7 +57,7 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         container.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding).isActive = true
         self.scrollView = container
 
-        let balance = UILabel()
+        let balance = BalanceLabel()
         balance.textColor = .fiservOrange
         self.addSubview(balance)
         balance.translatesAutoresizingMaskIntoConstraints = false

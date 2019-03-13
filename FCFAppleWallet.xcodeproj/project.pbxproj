@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		058A4A6222350F7D00D6CBC8 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058A4A6122350F7D00D6CBC8 /* PaymentView.swift */; };
+		058A4A642239117F00D6CBC8 /* BalanceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058A4A632239117F00D6CBC8 /* BalanceLabel.swift */; };
 		05B374EA222EA1B7008695F3 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B374E9222EA1B7008695F3 /* CreditCard.swift */; };
 		05E1AC15222D3E0000A9895A /* ParseFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC14222D3E0000A9895A /* ParseFont.swift */; };
 		05E1AC18222D3E8B00A9895A /* EXTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC17222D3E8B00A9895A /* EXTFont.swift */; };
@@ -37,6 +38,7 @@
 		037D27936EED2EE691A7F5EC /* Pods_FCFAppleWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FCFAppleWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05868887222D2E4500BFB2F3 /* FontAwesome5Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontAwesome5Free-Solid-900.otf"; sourceTree = "<group>"; };
 		058A4A6122350F7D00D6CBC8 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		058A4A632239117F00D6CBC8 /* BalanceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceLabel.swift; sourceTree = "<group>"; };
 		05B374E9222EA1B7008695F3 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		05E1AC14222D3E0000A9895A /* ParseFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFont.swift; sourceTree = "<group>"; };
 		05E1AC17222D3E8B00A9895A /* EXTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXTFont.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				05B374E9222EA1B7008695F3 /* CreditCard.swift */,
 				EADA26D0222E2C170042BC5A /* CreditCardPickerView.swift */,
 				EA1C536F2238A1640091CC4F /* CreditCardBalanceView.swift */,
+				058A4A632239117F00D6CBC8 /* BalanceLabel.swift */,
 			);
 			path = CreditCard;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 			files = (
 				EA1C53612236227E0091CC4F /* TransactionSegmentControl.swift in Sources */,
 				EA1C535F2235EAD20091CC4F /* MockCreditCardData.swift in Sources */,
+				058A4A642239117F00D6CBC8 /* BalanceLabel.swift in Sources */,
 				05E1AC18222D3E8B00A9895A /* EXTFont.swift in Sources */,
 				058A4A6222350F7D00D6CBC8 /* PaymentView.swift in Sources */,
 				EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */,
