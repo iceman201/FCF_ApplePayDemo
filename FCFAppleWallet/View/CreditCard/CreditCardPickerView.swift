@@ -22,9 +22,7 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
     var balanceLabel: BalanceLabel?
     private var currentBalance: Float = 0.00 {
         didSet {
-            let sign = NSMutableAttributedString(string: "-\(FontAwesome.dollarSign.rawValue)", attributes: [NSAttributedString.Key.font : UIFont.fontAwesome(ofSize: 11)])
-            sign.append(NSMutableAttributedString(string: " \(self.currentBalance)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: .bold)]))
-            self.balanceLabel?.attributedText = sign
+            self.balanceLabel?.counting(fromValue: 0, toValue: self.currentBalance, withDuration: 1, animationType: .EaseIn, counterType: .Float)
         }
     }
 

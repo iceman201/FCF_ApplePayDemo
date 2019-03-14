@@ -67,7 +67,7 @@ class CreditCardBalanceView: UIView {
 
     @objc func tapOnIt() {
         let strockAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        strockAnimation.toValue = 1
+        strockAnimation.toValue = 0.7 // Target value
         strockAnimation.duration = 2
         strockAnimation.fillMode = CAMediaTimingFillMode.forwards
         strockAnimation.isRemovedOnCompletion = false
