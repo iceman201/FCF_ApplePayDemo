@@ -116,21 +116,21 @@ class BalanceDetailCell: UITableViewCell {
         creditLimit.topAnchor.constraint(equalTo: accountType.bottomAnchor, constant: padding).isActive = true
         creditLimit.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
 
-        let dividerOne = self.addDivider(on: contentContainer, topOf: paymentsTowardsClosingBalance)
+        let dividerOne = self.addDivider(on: contentContainer, topOf: creditLimit)
 
         let purchaseInterestRate = DetailsLabel(fontWeight: .thin, textColor: UIColor.white.withAlphaComponent(0.8))
-        purchaseInterestRate.text = "Credit limit:"
-        contentContainer.addSubview(creditLimit)
+        purchaseInterestRate.text = "Purchase interest rate:"
+        contentContainer.addSubview(purchaseInterestRate)
         purchaseInterestRate.translatesAutoresizingMaskIntoConstraints = false
         purchaseInterestRate.topAnchor.constraint(equalTo: dividerOne.bottomAnchor, constant: padding).isActive = true
         purchaseInterestRate.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
 
-//        let creditLimit = DetailsLabel(fontWeight: .thin, textColor: UIColor.white.withAlphaComponent(0.8))
-//        creditLimit.text = "Credit limit:"
-//        contentContainer.addSubview(creditLimit)
-//        creditLimit.translatesAutoresizingMaskIntoConstraints = false
-//        creditLimit.topAnchor.constraint(equalTo: accountType.bottomAnchor, constant: padding).isActive = true
-//        creditLimit.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
+        let cashAdvanceInterestRate = DetailsLabel(fontWeight: .thin, textColor: UIColor.white.withAlphaComponent(0.8))
+        cashAdvanceInterestRate.text = "Cash advance interest rate:"
+        contentContainer.addSubview(cashAdvanceInterestRate)
+        cashAdvanceInterestRate.translatesAutoresizingMaskIntoConstraints = false
+        cashAdvanceInterestRate.topAnchor.constraint(equalTo: purchaseInterestRate.bottomAnchor, constant: padding).isActive = true
+        cashAdvanceInterestRate.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
 
 
 
