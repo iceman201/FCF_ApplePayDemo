@@ -20,7 +20,7 @@
 		4B7E68654601711ECD439E83 /* Pods_FCFAppleWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037D27936EED2EE691A7F5EC /* Pods_FCFAppleWallet.framework */; };
 		EA1C535F2235EAD20091CC4F /* MockCreditCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C535E2235EAD20091CC4F /* MockCreditCardData.swift */; };
 		EA1C53612236227E0091CC4F /* TransactionSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C53602236227E0091CC4F /* TransactionSegmentControl.swift */; };
-		EA1C53632237659E0091CC4F /* BalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C53622237659E0091CC4F /* BalanceCell.swift */; };
+		EA1C53632237659E0091CC4F /* BalanceDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C53622237659E0091CC4F /* BalanceDetailCell.swift */; };
 		EA1C53702238A1640091CC4F /* CreditCardBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C536F2238A1640091CC4F /* CreditCardBalanceView.swift */; };
 		EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6521BF6286003831C3 /* AppDelegate.swift */; };
 		EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6721BF6286003831C3 /* MainViewController.swift */; };
@@ -50,7 +50,7 @@
 		8101AB4E0577777D0896D9D8 /* Pods-FCFAppleWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FCFAppleWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-FCFAppleWallet/Pods-FCFAppleWallet.release.xcconfig"; sourceTree = "<group>"; };
 		EA1C535E2235EAD20091CC4F /* MockCreditCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCreditCardData.swift; sourceTree = "<group>"; };
 		EA1C53602236227E0091CC4F /* TransactionSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSegmentControl.swift; sourceTree = "<group>"; };
-		EA1C53622237659E0091CC4F /* BalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCell.swift; sourceTree = "<group>"; };
+		EA1C53622237659E0091CC4F /* BalanceDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceDetailCell.swift; sourceTree = "<group>"; };
 		EA1C536F2238A1640091CC4F /* CreditCardBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardBalanceView.swift; sourceTree = "<group>"; };
 		EA8CCE6221BF6286003831C3 /* FCFAppleWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCFAppleWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA8CCE6521BF6286003831C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 		EA1C536D2238A11F0091CC4F /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
-				EA1C53622237659E0091CC4F /* BalanceCell.swift */,
+				EA1C53622237659E0091CC4F /* BalanceDetailCell.swift */,
 				05E1AC1C222D4A4D00A9895A /* TransactionRecordCell.swift */,
 			);
 			path = TableCell;
@@ -337,7 +337,7 @@
 				EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */,
 				05E1AC1B222D46D300A9895A /* WalletViewController.swift in Sources */,
 				EADA26D1222E2C170042BC5A /* CreditCardPickerView.swift in Sources */,
-				EA1C53632237659E0091CC4F /* BalanceCell.swift in Sources */,
+				EA1C53632237659E0091CC4F /* BalanceDetailCell.swift in Sources */,
 				EADA26CF222DE1FF0042BC5A /* EXTUserInterface.swift in Sources */,
 				05B374EA222EA1B7008695F3 /* CreditCard.swift in Sources */,
 				05E1AC1D222D4A4D00A9895A /* TransactionRecordCell.swift in Sources */,

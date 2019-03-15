@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: UI Components
-extension UIViewController {
+extension UIView {
     func addDivider(on headerView: UIView, topOf headerTopContainerView: UIView) -> UIView {
         let divider = UIView()
         divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
@@ -17,8 +17,8 @@ extension UIViewController {
         divider.translatesAutoresizingMaskIntoConstraints = false
         divider.topAnchor.constraint(equalTo: headerTopContainerView.bottomAnchor, constant: padding * 2).isActive = true
         divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        divider.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
-        divider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding * 2).isActive = true
+        divider.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding * 2).isActive = true
+        divider.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding * 2).isActive = true
         return divider
     }
 }
