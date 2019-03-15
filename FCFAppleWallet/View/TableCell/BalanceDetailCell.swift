@@ -91,8 +91,10 @@ class BalanceDetailCell: UITableViewCell {
         dueBy.topAnchor.constraint(equalTo: minimumDue.bottomAnchor, constant: padding).isActive = true
 
         let paymentsTowardsClosingBalance = DetailsLabel(fontWeight: .thin, textColor: UIColor.white.withAlphaComponent(0.8))
-        let labelAttr: NSMutableAttributedString = NSMutableAttributedString(string: "Payments towards closing balance: \n", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.8)])
-        labelAttr.append(NSAttributedString(string: "(updated overnight on business days)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 10, weight: .thin), NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.8)]))
+        let labelAttr: NSMutableAttributedString = NSMutableAttributedString(string: "Payments towards closing balance: \n",
+                                                                             attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.8)])
+        labelAttr.append(NSAttributedString(string: "(updated overnight on business days)",
+                                            attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 10, weight: .thin), NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.8)]))
         paymentsTowardsClosingBalance.attributedText = labelAttr
         paymentsTowardsClosingBalance.numberOfLines = 0
         contentContainer.addSubview(paymentsTowardsClosingBalance)
