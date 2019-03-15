@@ -49,7 +49,7 @@ class WalletViewController: UIViewController {
         content.separatorStyle = .none
         content.backgroundColor = backgroundColor
         content.register(TransactionRecordCell.self, forCellReuseIdentifier: kTransactionCell)
-        content.register(BalanceCell.self, forCellReuseIdentifier: kBalanceCell)
+        content.register(BalanceDetailCell.self, forCellReuseIdentifier: kBalanceCell)
         self.view.addSubview(content)
         content.translatesAutoresizingMaskIntoConstraints = false
         content.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
@@ -159,11 +159,13 @@ class WalletViewController: UIViewController {
                         cardNumber: "• • • •     • • • •     • • • •     3321",
                         cardDate: "06/23",
                         cardProvider: PaymentLogo.visa)
+
         let three = CreditCard()
         three.loadContent(cardName: "J S. SWOFFORD",
                           cardNumber: "• • • •     • • • • • •     21101",
                           cardDate: "95",
                           cardProvider: PaymentLogo.americanExpress)
+        
         self.creditCardPicker?.cards = [three, one, two]
         self.paymentNetwork = [.amex, .chinaUnionPay, .discover, .masterCard, .visa]
     }
@@ -273,7 +275,7 @@ extension WalletViewController: UITableViewDataSource {
 
         switch self.sectionType {
         case WalletViewSectionType.balance:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: kBalanceCell, for: indexPath) as? BalanceCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: kBalanceCell, for: indexPath) as? BalanceDetailCell else { return UITableViewCell() }
 //            cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
 //            cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
 //            cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
