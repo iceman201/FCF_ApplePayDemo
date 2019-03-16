@@ -49,7 +49,6 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         self.addSubview(container)
         container.translatesAutoresizingMaskIntoConstraints = false
         container.topAnchor.constraint(equalTo: self.topAnchor, constant: padding).isActive = true
-//        container.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding * 2).isActive = true
         container.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -padding * 3).isActive = true
         container.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding).isActive = true
         container.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding).isActive = true
@@ -73,7 +72,6 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         pageControl.heightAnchor.constraint(equalToConstant: padding).isActive = true
         pageControl.topAnchor.constraint(equalTo: container.bottomAnchor, constant: padding).isActive = true
         pageControl.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//        pageControl.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.pageControl = pageControl
     }
 
