@@ -107,7 +107,7 @@ extension PaymentView: UICollectionViewDataSource {
             
             cell.loadInfo(name: nil, avatar: iconImage!)
         } else {
-            cell.loadInfo(name: "haha", avatar: #imageLiteral(resourceName: "001-mastercard"))
+            cell.loadInfo(name: "haha", avatar: UIImage(named: "\(indexPath.row)")!)
         }
         return cell
     }
@@ -181,7 +181,7 @@ class PaymentContactCollectionCell: UICollectionViewCell {
         name.textColor = UIColor.fiservOrange
         self.addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
-        name.topAnchor.constraint(equalTo: avatar.bottomAnchor).isActive = true
+        name.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: padding / 2).isActive = true
         name.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.nameLabel = name
     }
@@ -196,6 +196,13 @@ class PaymentContactCollectionCell: UICollectionViewCell {
             self.avatarCenterY?.constant = 0
             self.height?.constant = padding * 3
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let avatar = self.avatar else { return }
+        avatar.layer.cornerRadius = avatar.frame.height / 2
+        avatar.layer.masksToBounds = true
     }
 
     override func prepareForReuse() {
