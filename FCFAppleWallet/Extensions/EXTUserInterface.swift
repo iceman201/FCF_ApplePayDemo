@@ -12,7 +12,7 @@ import UIKit
 extension UIView {
     func addDivider(on headerView: UIView, topOf headerTopContainerView: UIView) -> UIView {
         let divider = UIView()
-        divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        divider.backgroundColor = UIColor.white.withAlphaComponent(0.8)
         headerView.addSubview(divider)
         divider.translatesAutoresizingMaskIntoConstraints = false
         divider.topAnchor.constraint(equalTo: headerTopContainerView.bottomAnchor, constant: padding * 2).isActive = true

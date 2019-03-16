@@ -78,7 +78,34 @@ extension PaymentView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         if indexPath.row == 0 {
-            cell.loadInfo(name: nil, avatar: #imageLiteral(resourceName: "Add"))
+          /*  - (UIImage *)imageFromString:(NSString *)string attributes:(NSDictionary *)attributes size:(CGSize)size
+            {
+                UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+                [string drawInRect:CGRectMake(0, 0, size.width, size.height) withAttributes:attributes];
+                UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                
+                return image;
+            }*/
+            
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.colors = [UIColor(hexString: "#FDC830").cgColor,
+                                    UIColor(hexString: "#f7797d").cgColor,
+                                    UIColor(hexString: "#F37335").cgColor]
+            gradientLayer.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
+            gradientLayer.cornerRadius = 64/2
+            gradientLayer.backgroundColor = UIColor.clear.cgColor
+            UIGraphicsBeginImageContextWithOptions(gradientLayer.frame.size, false, 0.0)
+            let context = UIGraphicsGetCurrentContext()
+            gradientLayer.render(in: context!)
+            
+            let icon = "\(FontAwesome.plus)" as NSString
+            icon.draw(in: CGRect(x: 6, y: 3, width: 64, height: 64), withAttributes: [NSAttributedString.Key.font: UIFont.fontAwesome(ofSize: 64), NSAttributedString.Key.foregroundColor: UIColor.white])
+            
+            let iconImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndPDFContext()
+            
+            cell.loadInfo(name: nil, avatar: iconImage!)
         } else {
             cell.loadInfo(name: "haha", avatar: #imageLiteral(resourceName: "001-mastercard"))
         }
