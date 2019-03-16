@@ -16,8 +16,10 @@ fileprivate enum WalletViewSectionType {
 }
 
 class WalletViewController: UIViewController {
+    
     weak var contentTable: UITableView?
     weak var creditCardPicker: CreditCardPickerView?
+    weak var creditCardBalanceView: CreditCardBalanceView?
     weak var payButton: UIImageView?
     weak var headerView: UIView?
     var paymentNetwork: [PKPaymentNetwork]!
@@ -65,6 +67,8 @@ class WalletViewController: UIViewController {
 
         let creditCardPicker = CreditCardPickerView()
         creditCardPicker.cardBalances = [53630.0, 3230.0, 980.0]
+        creditCardPicker.creditLimits = [100000.0, 5000.0, 3000.0]
+        creditCardPicker.delegate = self
         headerView.addSubview(creditCardPicker)
         creditCardPicker.translatesAutoresizingMaskIntoConstraints = false
         creditCardPicker.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
@@ -111,13 +115,13 @@ class WalletViewController: UIViewController {
         due.drawButtonShadow()
 
         let creditCardBalance = CreditCardBalanceView()
-        creditCardBalance.backgroundColor = .cyan
         headerView.addSubview(creditCardBalance)
         creditCardBalance.translatesAutoresizingMaskIntoConstraints = false
         creditCardBalance.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
         creditCardBalance.topAnchor.constraint(equalTo: creditCardPicker.bottomAnchor, constant: padding * 2).isActive = true
         creditCardBalance.bottomAnchor.constraint(equalTo: due.bottomAnchor, constant: 0).isActive = true
         creditCardBalance.widthAnchor.constraint(equalTo: creditCardBalance.heightAnchor, multiplier: 2/1).isActive = true
+        self.creditCardBalanceView = creditCardBalance
 
         let payment = PaymentView()
         payment.sectionTitle?.text = "Send Money to"
@@ -199,7 +203,7 @@ class WalletViewController: UIViewController {
     }
 
     @objc func tapOnDuePayment() {
-
+        // Link to Ben's Transaction FCF
     }
 
     @objc func tapOnPay() {
@@ -354,5 +358,15 @@ extension WalletViewController: PKAddPaymentPassViewControllerDelegate {
             }
             print("closed")
         }
+    }
+}
+
+extension WalletViewController: CreditCardScrollingDelegate {
+    func getCardLimitPercentage(percentage: Float) {
+        self.creditCardBalanceView?.startAnimation(with: percentage)
+    }
+    
+    func getSelectCardBalance(balance: Float) {
+        self.creditCardBalanceView?.balanceLabel?.counting(fromValue: 0, toValue: balance, withDuration: 1, animationType: .EaseIn, counterType: .Float)
     }
 }

@@ -11,31 +11,21 @@ import UIKit
 class CreditCardBalanceView: UIView {
     var container: UIView?
     let shapeLayer = CAShapeLayer()
-
+    
+    weak var balanceLabel: BalanceLabel?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        let container = UIView()
-        self.addSubview(container)
-        container.translatesAutoresizingMaskIntoConstraints = false
-        container.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        container.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        container.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        container.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.container = container
+        loadView()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-
-
+        
         if let center = self.container?.center, let height = self.container?.frame.height {
             let bottomCenter = CGPoint(x: center.x, y: height * 3.2/5)
             let circularPath = UIBezierPath(arcCenter: bottomCenter,
@@ -51,23 +41,67 @@ class CreditCardBalanceView: UIView {
             trackLayer.lineCap = .round
             self.layer.addSublayer(trackLayer)
             
-            
             shapeLayer.path = circularPath.cgPath
             shapeLayer.strokeColor = UIColor.fiservOrange.cgColor
             shapeLayer.lineWidth = padding
             shapeLayer.fillColor = UIColor.clear.cgColor
             shapeLayer.lineCap = .round
             shapeLayer.strokeEnd = 0
-
             self.layer.addSublayer(shapeLayer)
-            
-            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CreditCardBalanceView.tapOnIt)))
         }
     }
+    
+    fileprivate func loadView() {
+        let container = UIView()
+        self.addSubview(container)
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        container.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        container.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        container.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.container = container
+        
+        let availableLabel = BalanceLabel()
+        availableLabel.textColor = .fiservOrange
+        availableLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        self.addSubview(availableLabel)
+        availableLabel.translatesAutoresizingMaskIntoConstraints = false
+        availableLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: padding).isActive = true
+        availableLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.balanceLabel = availableLabel
+        
+        let available = UILabel()
+        available.textColor = .fiservOrange
+        available.text = "Available"
+        available.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        self.addSubview(available)
+        available.translatesAutoresizingMaskIntoConstraints = false
+        available.topAnchor.constraint(equalTo: availableLabel.bottomAnchor, constant: padding/2).isActive = true
+        available.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        
+        let minLabel = UILabel()
+        minLabel.text = "Min."
+        minLabel.textColor = .fiservOrange
+        minLabel.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        self.addSubview(minLabel)
+        minLabel.translatesAutoresizingMaskIntoConstraints = false
+        minLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: padding).isActive = true
+        minLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        
+        let maxLabel = UILabel()
+        maxLabel.text = "Max."
+        maxLabel.textAlignment = .right
+        maxLabel.textColor = .fiservOrange
+        maxLabel.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        self.addSubview(maxLabel)
+        maxLabel.translatesAutoresizingMaskIntoConstraints = false
+        maxLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: padding).isActive = true
+        maxLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    }
 
-    @objc func tapOnIt() {
+    func startAnimation(with progress: Float) {
         let strockAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        strockAnimation.toValue = 0.7 // Target value
+        strockAnimation.toValue = progress // Target value
         strockAnimation.duration = 2
         strockAnimation.fillMode = CAMediaTimingFillMode.forwards
         strockAnimation.isRemovedOnCompletion = false
