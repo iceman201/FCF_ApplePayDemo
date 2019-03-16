@@ -122,12 +122,14 @@ class WalletViewController: UIViewController {
         creditCardBalance.bottomAnchor.constraint(equalTo: due.bottomAnchor, constant: 0).isActive = true
         creditCardBalance.widthAnchor.constraint(equalTo: creditCardBalance.heightAnchor, multiplier: 2/1).isActive = true
         self.creditCardBalanceView = creditCardBalance
-
+        
+        let divider = headerView.addDivider(on: headerView, topOf: creditCardBalance, color: .fiservOrange)
+        
         let payment = PaymentView()
         payment.sectionTitle?.text = "Send Money to"
         headerView.addSubview(payment)
         payment.translatesAutoresizingMaskIntoConstraints = false
-        payment.topAnchor.constraint(equalTo: due.bottomAnchor, constant: padding * 2).isActive = true
+        payment.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: padding).isActive = true
         payment.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding * 2).isActive = true
         payment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         payment.heightAnchor.constraint(equalToConstant: padding * 15).isActive = true
