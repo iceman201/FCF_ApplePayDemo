@@ -282,20 +282,9 @@ extension WalletViewController: UITableViewDataSource {
         switch self.sectionType {
         case WalletViewSectionType.balance:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: kBalanceCell, for: indexPath) as? BalanceDetailCell else { return UITableViewCell() }
-//            cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
-//            cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
-//            cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
-//            cell.topLineLabel.text = "Team Lunch"
-//            cell.subLineLabel.text = "Auckland, New Zealand"
             return cell
         case WalletViewSectionType.statement:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
-            cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
-            cell.backgroundColor = backgroundColor
-            cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
-            cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
-            cell.topLineLabel.text = "Team Lunch"
-            cell.subLineLabel.text = "Auckland, New Zealand"
             return cell
         case WalletViewSectionType.transaction:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }

@@ -12,7 +12,7 @@ class BalanceDetailCell: UITableViewCell {
     weak var contentBackground: UIView?
     weak var statementDate: UILabel?
     weak var period: UILabel?
-//    weak var
+    private weak var container: UIView?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,7 +26,7 @@ class BalanceDetailCell: UITableViewCell {
 
     func loadView() {
         let container = UIView()
-        container.backgroundColor = .fiservOrange
+        container.backgroundColor = UIColor.fiservOrange.combineWith(opacity: .Secondary)
         self.contentView.addSubview(container)
         container.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -35,6 +35,7 @@ class BalanceDetailCell: UITableViewCell {
             container.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -padding * 2),
             container.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
+        self.container = container
 
         let contentContainer = UIView()
         container.addSubview(contentContainer)
@@ -43,7 +44,6 @@ class BalanceDetailCell: UITableViewCell {
         contentContainer.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: padding).isActive = true
         contentContainer.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding).isActive = true
         contentContainer.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-
         self.contentBackground = container
 
         let dateLabel = DetailsLabel(fontWeight: .semibold)
@@ -135,9 +135,12 @@ class BalanceDetailCell: UITableViewCell {
         cashAdvanceInterestRate.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
 
 
-
-
-
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.contentBackground?.layer.cornerRadius = padding * 5
+        self.contentBackground?.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
     }
 }
 
