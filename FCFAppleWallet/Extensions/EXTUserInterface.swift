@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 // MARK: UI Components
 extension UIView {
     func addDivider(on headerView: UIView, topOf headerTopContainerView: UIView, color: UIColor = .white) -> UIView {
@@ -62,7 +64,60 @@ let padding: CGFloat = 8
 let defaultCornerRadius: CGFloat = 6
 
 extension UIColor {
+    enum ColorOpacity: Float {
+        case Solid = 1.0
+        case Primary = 0.9
+        case Secondary = 0.6
+        case Teriary = 0.4
+        case Disable = 0.3
+        case Divider = 0.2
+        case BTPressed = 0.1
+        case AlternativeBG = 0.05
+    }
+    
     open class var fiservOrange: UIColor {
         return UIColor(displayP3Red: 232/255, green: 111/255, blue: 45/255, alpha: 1)
     }
+    
+    func combineWith(opacity: ColorOpacity) -> UIColor {
+        
+        let rgbCGColour = self.cgColor
+        let rgbColours = rgbCGColour.components
+        guard let red = rgbColours?[0],
+            let green = rgbColours?[1],
+            let blue = rgbColours?[2] else {
+                print("Error")
+                return self
+        }
+        
+        let combineRed = (red*255) * CGFloat(opacity.rawValue) + CGFloat(1 - opacity.rawValue) * 255
+        let combineGreen = (green*255) * CGFloat(opacity.rawValue) + CGFloat(1 - opacity.rawValue) * 255
+        let combineBlue = (blue*255) * CGFloat(opacity.rawValue) + CGFloat(1 - opacity.rawValue) * 255
+        
+        return UIColor(displayP3Red: combineRed/255.0, green: combineGreen/255.0, blue: combineBlue/255.0, alpha: 1)
+    }
 }
+
+/* linear equations
+ opacity x Overlay + (1-opacity) * Background
+ 
+ https://www.viget.com/articles/equating-color-and-transparency/
+ 
+Variables:
+c - color (unknown)
+f - opacity (unknown)
+
+Equations:
+c * f + (1 − f) * 255 = 160. (blending with white)
+c * f + (1 − f) * 0 = 73. (blending with black)
+
+Rearrange to get:
+c * f − 255 f = −95.
+c * f = 73.
+255 f = 168.
+
+Therefore:
+f = 168/255 ≈ 65.9%.
+c = 6205/56 ≈ 110.8.
+*/
+

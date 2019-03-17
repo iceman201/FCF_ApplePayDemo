@@ -72,7 +72,7 @@ class CreditCardBalanceView: UIView {
         
         let available = UILabel()
         available.textColor = .fiservOrange
-        available.text = "Available"
+        available.text = "Balance"
         available.font = UIFont.systemFont(ofSize: 12, weight: .thin)
         self.addSubview(available)
         available.translatesAutoresizingMaskIntoConstraints = false
