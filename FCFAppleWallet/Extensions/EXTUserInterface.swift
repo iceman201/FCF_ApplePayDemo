@@ -78,6 +78,10 @@ extension UIColor {
     open class var fiservOrange: UIColor {
         return UIColor(displayP3Red: 232/255, green: 111/255, blue: 45/255, alpha: 1)
     }
+    open class var fiservWhite: UIColor {
+        //Note: Somehow Apple white doesn't contain blue index
+        return UIColor(displayP3Red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+    }
     
     func combineWith(opacity: ColorOpacity) -> UIColor {
         
@@ -89,7 +93,7 @@ extension UIColor {
                 print("Error")
                 return self
         }
-        
+
         let combineRed = (red*255) * CGFloat(opacity.rawValue) + CGFloat(1 - opacity.rawValue) * 255
         let combineGreen = (green*255) * CGFloat(opacity.rawValue) + CGFloat(1 - opacity.rawValue) * 255
         let combineBlue = (blue*255) * CGFloat(opacity.rawValue) + CGFloat(1 - opacity.rawValue) * 255

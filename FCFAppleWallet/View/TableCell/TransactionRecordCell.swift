@@ -34,7 +34,7 @@ class TransactionRecordCell: UITableViewCell {
         self.contentBackground = container
         
         let top = UILabel()
-        top.textColor = .white
+        top.textColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
         container.addSubview(top)
         top.translatesAutoresizingMaskIntoConstraints = false
         top.topAnchor.constraint(equalTo: container.topAnchor, constant: padding).isActive = true
@@ -52,7 +52,7 @@ class TransactionRecordCell: UITableViewCell {
         self.subLineLabel = sub
         
         let balance = UILabel()
-        balance.textColor = .white
+        balance.textColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
         container.addSubview(balance)
         balance.translatesAutoresizingMaskIntoConstraints = false
         balance.topAnchor.constraint(equalTo: container.topAnchor, constant: padding).isActive = true

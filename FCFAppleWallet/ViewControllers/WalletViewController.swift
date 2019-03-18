@@ -39,7 +39,7 @@ class WalletViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -99,7 +99,7 @@ class WalletViewController: UIViewController {
         due.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         due.contentEdgeInsets = UIEdgeInsets(top: 0, left: padding * 1.5, bottom: 0, right: padding * 1.5)
         due.setTitleColor(.fiservOrange, for: .normal)
-        due.backgroundColor = .white
+        due.backgroundColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
         due.layer.borderWidth = 1
         due.layer.borderColor = UIColor.fiservOrange.cgColor
         due.layer.cornerRadius = defaultCornerRadius

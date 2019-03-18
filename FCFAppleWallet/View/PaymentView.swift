@@ -100,7 +100,7 @@ extension PaymentView: UICollectionViewDataSource {
             gradientLayer.render(in: context!)
             
             let icon = "\(FontAwesome.plus)" as NSString
-            icon.draw(in: CGRect(x: 6, y: 3, width: 64, height: 64), withAttributes: [NSAttributedString.Key.font: UIFont.fontAwesome(ofSize: 64), NSAttributedString.Key.foregroundColor: UIColor.white])
+            icon.draw(in: CGRect(x: 6, y: 3, width: 64, height: 64), withAttributes: [NSAttributedString.Key.font: UIFont.fontAwesome(ofSize: 64), NSAttributedString.Key.foregroundColor: UIColor.fiservWhite.combineWith(opacity: .Solid)])
             
             let iconImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndPDFContext()
