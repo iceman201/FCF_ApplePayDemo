@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreditCard: UIView {
+class CreditCardView: UIView {
     weak var cardNumber: UILabel? {
         didSet {
             // reformat credit card number

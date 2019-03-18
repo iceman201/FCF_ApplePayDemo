@@ -65,14 +65,14 @@ let defaultCornerRadius: CGFloat = 6
 
 extension UIColor {
     enum ColorOpacity: Float {
-        case Solid = 1.0
-        case Primary = 0.9
-        case Secondary = 0.6
-        case Teriary = 0.4
-        case Disable = 0.3
-        case Divider = 0.2
-        case BTPressed = 0.1
-        case AlternativeBG = 0.05
+        case Solid = 1.0                // 100%
+        case Primary = 0.9              // 90%
+        case Secondary = 0.6            // 60%
+        case Teriary = 0.4              // 40%
+        case Disable = 0.3              // 30%
+        case Divider = 0.2              // 20%
+        case BTPressed = 0.1            // 10%
+        case AlternativeBG = 0.05       // 5%
     }
     
     open class var fiservOrange: UIColor {

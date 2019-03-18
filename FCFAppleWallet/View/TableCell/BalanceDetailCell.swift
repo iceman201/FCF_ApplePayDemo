@@ -71,7 +71,6 @@ class BalanceDetailCell: UITableViewCell {
         period.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
 
         let periodLabel = DetailsLabel(fontWeight: .medium, textColor: UIColor.fiservWhite.combineWith(opacity: .Solid))
-        periodLabel.text = "haha"
         contentContainer.addSubview(periodLabel)
         periodLabel.translatesAutoresizingMaskIntoConstraints = false
         periodLabel.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor).isActive = true
@@ -86,7 +85,6 @@ class BalanceDetailCell: UITableViewCell {
         closeBalance.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
 
         let closeBalanceLabel = DetailsLabel(fontWeight: .medium, textColor: UIColor.fiservWhite.combineWith(opacity: .Solid))
-        closeBalanceLabel.text = "hdhah"
         contentContainer.addSubview(closeBalanceLabel)
         closeBalanceLabel.translatesAutoresizingMaskIntoConstraints = false
         closeBalanceLabel.topAnchor.constraint(equalTo: closeBalance.topAnchor).isActive = true
