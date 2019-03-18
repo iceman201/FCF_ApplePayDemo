@@ -74,8 +74,6 @@ class WalletViewController: UIViewController {
         self.headerView = headerView
 
         let creditCardPicker = CreditCardPickerView()
-        creditCardPicker.cardBalances = [53630.0, 3230.0, 980.0]
-        creditCardPicker.creditLimits = [100000.0, 5000.0, 3000.0]
         creditCardPicker.delegate = self
         headerView.addSubview(creditCardPicker)
         creditCardPicker.translatesAutoresizingMaskIntoConstraints = false
@@ -168,11 +166,17 @@ class WalletViewController: UIViewController {
 
     func setupCreditCard() {
         var allCards = [CreditCardView]()
+        var allCardBalances = [Float]()
+        var allCardLimits = [Float]()
         self.cardInfo.forEach { (card) in
             let newCard = CreditCardView()
             newCard.loadContent(cardName: card.name, cardNumber: card.number, cardDate: card.expiryDate, cardProvider: card.provider)
             allCards.append(newCard)
+            allCardBalances.append(card.cardDetails.creditLimit - card.cardDetails.closeBalance)
+            allCardLimits.append(card.cardDetails.creditLimit)
         }
+        self.creditCardPicker?.cardBalances = allCardBalances
+        self.creditCardPicker?.creditLimits = allCardLimits
         self.creditCardPicker?.cards = allCards
     }
 
@@ -237,8 +241,6 @@ class WalletViewController: UIViewController {
         //        }
     }
 
-
-
     func isWalletAvailable() -> Bool {
         return PKAddPaymentPassViewController.canAddPaymentPass()
     }
@@ -258,7 +260,6 @@ extension WalletViewController: UITableViewDelegate {
         case .transaction:
             return padding * 8
         }
-
     }
 }
 
@@ -266,6 +267,7 @@ extension WalletViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.sectionType {
         case .balance:
