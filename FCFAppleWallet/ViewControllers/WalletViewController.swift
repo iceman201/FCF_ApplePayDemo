@@ -30,6 +30,14 @@ class WalletViewController: UIViewController {
     let kBalanceCell = "kBalanceCell"
 
     let backgroundColor: UIColor = UIColor(displayP3Red: 249.0/255.0, green: 247.0/255.0, blue: 235.0/255.0, alpha: 1)
+    let cardInfo = CreditCard.generateCards()
+    var currentCardIndex: Int? {
+        didSet {
+            if sectionType == .balance {
+                self.contentTable?.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: UITableView.RowAnimation.none)
+            }
+        }
+    }
 
     fileprivate var sectionType: WalletViewSectionType = .balance {
         didSet {
@@ -134,7 +142,7 @@ class WalletViewController: UIViewController {
         payment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         payment.heightAnchor.constraint(equalToConstant: padding * 15).isActive = true
         
-        let sectionSwitch = TransactionSegmentControl(frame: .zero, segmentColor: UIColor(displayP3Red: 243.0/255.0, green: 195.0/255.0, blue: 117.0/255.0, alpha: 1))
+        let sectionSwitch = TransactionSegmentControl(frame: .zero, segmentColor: UIColor.fiservOrange.combineWith(opacity: .Secondary))
         sectionSwitch.segmentTitles = ["Details", "Transaction", "Statement"]
         headerView.addSubview(sectionSwitch)
         sectionSwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -153,29 +161,21 @@ class WalletViewController: UIViewController {
 
         self.contentTable?.delegate = self
         self.contentTable?.dataSource = self
-
-        let one = CreditCard()
-        one.loadContent(cardName: "L. SMITH",
-                        cardNumber: "• • • •     • • • •     • • • •     7768",
-                        cardDate: "06/23",
-                        cardProvider: PaymentLogo.mastercard)
-
-        let two = CreditCard()
-        two.loadContent(cardName: "T S. GIBSON",
-                        cardNumber: "• • • •     • • • •     • • • •     3321",
-                        cardDate: "06/23",
-                        cardProvider: PaymentLogo.visa)
-
-        let three = CreditCard()
-        three.loadContent(cardName: "J S. SWOFFORD",
-                          cardNumber: "• • • •     • • • • • •     21101",
-                          cardDate: "95",
-                          cardProvider: PaymentLogo.americanExpress)
-        
-        self.creditCardPicker?.cards = [three, one, two]
         self.paymentNetwork = [.amex, .chinaUnionPay, .discover, .masterCard, .visa]
+
+        setupCreditCard()
     }
-    
+
+    func setupCreditCard() {
+        var allCards = [CreditCardView]()
+        self.cardInfo.forEach { (card) in
+            let newCard = CreditCardView()
+            newCard.loadContent(cardName: card.name, cardNumber: card.number, cardDate: card.expiryDate, cardProvider: card.provider)
+            allCards.append(newCard)
+        }
+        self.creditCardPicker?.cards = allCards
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         guard let headerView = contentTable?.tableHeaderView else { return }
@@ -282,13 +282,15 @@ extension WalletViewController: UITableViewDataSource {
         switch self.sectionType {
         case WalletViewSectionType.balance:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: kBalanceCell, for: indexPath) as? BalanceDetailCell else { return UITableViewCell() }
+            let details = cardInfo[self.currentCardIndex ?? 0].cardDetails
+            cell.loadCardDetails(period: details.period, closeBalance: details.closeBalance, minimumPaymentDue: details.minimumPayDue, dueBy: details.dueBy, ptcb: details.ptcb, type: details.type, creditLimit: details.creditLimit, purchaseInterestRate: details.purchaseRate, cashInterestRate: details.cashRate)
             return cell
         case WalletViewSectionType.statement:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
             return cell
         case WalletViewSectionType.transaction:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
-            cell.contentBackground.backgroundColor = UIColor(hexString: "#FF9800").withAlphaComponent(0.6)// this should goes to view class
+            cell.contentBackground.backgroundColor = UIColor.fiservOrange.combineWith(opacity: .Secondary)// this should goes to view class
             cell.backgroundColor = backgroundColor
             cell.balanceLabel.text = "-$\(Int.random(in: 1...99))"
             cell.dateLineLabel.text = "\(Int.random(in: 1...30)) Feb 2019"
@@ -353,6 +355,10 @@ extension WalletViewController: PKAddPaymentPassViewControllerDelegate {
 }
 
 extension WalletViewController: CreditCardScrollingDelegate {
+    func getCurrectSelectIndex(index: Int) {
+        self.currentCardIndex = index
+    }
+
     func getCardLimitPercentage(percentage: Float) {
         self.creditCardBalanceView?.startAnimation(with: percentage)
     }
@@ -360,4 +366,5 @@ extension WalletViewController: CreditCardScrollingDelegate {
     func getSelectCardBalance(balance: Float) {
         self.creditCardBalanceView?.balanceLabel?.counting(fromValue: 0, toValue: balance, withDuration: 1, animationType: .EaseIn, counterType: .Float)
     }
+
 }

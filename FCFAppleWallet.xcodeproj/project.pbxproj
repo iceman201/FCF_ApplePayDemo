@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		058A4A6222350F7D00D6CBC8 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058A4A6122350F7D00D6CBC8 /* PaymentView.swift */; };
 		058A4A642239117F00D6CBC8 /* BalanceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058A4A632239117F00D6CBC8 /* BalanceLabel.swift */; };
-		05B374EA222EA1B7008695F3 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B374E9222EA1B7008695F3 /* CreditCard.swift */; };
+		05B374EA222EA1B7008695F3 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B374E9222EA1B7008695F3 /* CreditCardView.swift */; };
 		05E1AC15222D3E0000A9895A /* ParseFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC14222D3E0000A9895A /* ParseFont.swift */; };
 		05E1AC18222D3E8B00A9895A /* EXTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC17222D3E8B00A9895A /* EXTFont.swift */; };
 		05E1AC19222D44EE00A9895A /* FontAwesome5Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 05868887222D2E4500BFB2F3 /* FontAwesome5Free-Solid-900.otf */; };
@@ -39,7 +39,7 @@
 		05868887222D2E4500BFB2F3 /* FontAwesome5Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontAwesome5Free-Solid-900.otf"; sourceTree = "<group>"; };
 		058A4A6122350F7D00D6CBC8 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		058A4A632239117F00D6CBC8 /* BalanceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceLabel.swift; sourceTree = "<group>"; };
-		05B374E9222EA1B7008695F3 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
+		05B374E9222EA1B7008695F3 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		05E1AC14222D3E0000A9895A /* ParseFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFont.swift; sourceTree = "<group>"; };
 		05E1AC17222D3E8B00A9895A /* EXTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXTFont.swift; sourceTree = "<group>"; };
 		05E1AC1A222D46D300A9895A /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 		EA1C536E2238A13A0091CC4F /* CreditCard */ = {
 			isa = PBXGroup;
 			children = (
-				05B374E9222EA1B7008695F3 /* CreditCard.swift */,
+				05B374E9222EA1B7008695F3 /* CreditCardView.swift */,
 				EADA26D0222E2C170042BC5A /* CreditCardPickerView.swift */,
 				EA1C536F2238A1640091CC4F /* CreditCardBalanceView.swift */,
 				058A4A632239117F00D6CBC8 /* BalanceLabel.swift */,
@@ -339,7 +339,7 @@
 				EADA26D1222E2C170042BC5A /* CreditCardPickerView.swift in Sources */,
 				EA1C53632237659E0091CC4F /* BalanceDetailCell.swift in Sources */,
 				EADA26CF222DE1FF0042BC5A /* EXTUserInterface.swift in Sources */,
-				05B374EA222EA1B7008695F3 /* CreditCard.swift in Sources */,
+				05B374EA222EA1B7008695F3 /* CreditCardView.swift in Sources */,
 				05E1AC1D222D4A4D00A9895A /* TransactionRecordCell.swift in Sources */,
 				EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */,
 				EA1C53702238A1640091CC4F /* CreditCardBalanceView.swift in Sources */,

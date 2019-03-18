@@ -11,6 +11,7 @@ import UIKit
 protocol CreditCardScrollingDelegate {
     func getSelectCardBalance(balance: Float)
     func getCardLimitPercentage(percentage: Float)
+    func getCurrectSelectIndex(index: Int)
 }
 
 class CreditCardPickerView: UIView, UIScrollViewDelegate {
@@ -39,7 +40,14 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         }
     }
 
-    public var cards: [CreditCard]? {
+    private var currentSelectIndex: Int = 0 {
+        didSet {
+            self.pageControl?.currentPage = self.currentSelectIndex
+            delegate?.getCurrectSelectIndex(index: self.currentSelectIndex)
+        }
+    }
+
+    public var cards: [CreditCardView]? {
         didSet {
             loadViews()
             self.pageControl?.numberOfPages = cards?.count ?? 0
@@ -95,7 +103,7 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
         }
     }
 
-    func loadCreditCard(cards: [CreditCard]) {
+    func loadCreditCard(cards: [CreditCardView]) {
         self.setNeedsLayout()
         self.scrollView?.contentSize = CGSize(width: self.scrollView!.frame.width * CGFloat(cards.count), height: 0)
         self.scrollView?.isPagingEnabled = true
@@ -112,7 +120,7 @@ class CreditCardPickerView: UIView, UIScrollViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex: Int = Int(round((scrollView.contentOffset.x - gap / 2) / self.frame.width))
-        self.pageControl?.currentPage = pageIndex
+        self.currentSelectIndex = pageIndex
 
         self.currentBalance = self.cardBalances[pageIndex]
         self.currentCreditLimit = self.creditLimits[pageIndex]

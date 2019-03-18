@@ -159,7 +159,7 @@ class PaymentContactCollectionCell: UICollectionViewCell {
     
     func loadView() {
         self.layer.cornerRadius = defaultCornerRadius * 1.5
-        self.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        self.backgroundColor = UIColor.fiservOrange.combineWith(opacity: .Divider)
         
         let avatar = UIImageView()
         avatar.contentMode = .scaleAspectFit
