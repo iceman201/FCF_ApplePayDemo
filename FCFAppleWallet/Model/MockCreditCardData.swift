@@ -24,25 +24,6 @@ class CreditCard: NSObject {
         super.init()
     }
 
-
-//    let one = CreditCardView()
-//    one.loadContent(cardName: "L. SMITH",
-//    cardNumber: "• • • •     • • • •     • • • •     7768",
-//    cardDate: "06/23",
-//    cardProvider: PaymentLogo.mastercard)
-//
-//    let two = CreditCardView()
-//    two.loadContent(cardName: "T S. GIBSON",
-//    cardNumber: "• • • •     • • • •     • • • •     3321",
-//    cardDate: "06/23",
-//    cardProvider: PaymentLogo.visa)
-//
-//    let three = CreditCardView()
-//    three.loadContent(cardName: "J S. SWOFFORD",
-//    cardNumber: "• • • •     • • • • • •     21101",
-//    cardDate: "95",
-//    cardProvider: PaymentLogo.americanExpress)
-
     static func generateCards() -> [CreditCard] {
         let nameList = ["T S. GIBSON", "J S. SWOFFORD", "L. SMITH"]
         let cardNumber = ["• • • •     • • • • • •     21101", "• • • •     • • • •     • • • •     7768", "• • • •     • • • •     • • • •     3321"]
@@ -71,7 +52,7 @@ class CreditCard: NSObject {
                                   dueBy: "30 Mar 2019",
                                   ptcb: 1000.00,
                                   type: "Cashback Visa",
-                                  creditLimit: 1000000.00,
+                                  creditLimit: 50000.00,
                                   purchaseRate: 20.5,
                                   cashRate: 23.60),
 
