@@ -45,7 +45,7 @@ class CreditCard: UIView {
         self.backgroundView = background
         
         let number = UILabel()
-        number.textColor = .white
+        number.textColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
         number.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         self.addSubview(number)
         number.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +65,7 @@ class CreditCard: UIView {
         self.logo = chip
         
         let paywave = UILabel()
-        paywave.textColor = .white
+        paywave.textColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
         paywave.font = UIFont.paymentLogo(ofSize: 20)
         paywave.text = PaymentLogo.contactless.rawValue
         self.addSubview(paywave)
@@ -84,7 +84,7 @@ class CreditCard: UIView {
         fiserv.heightAnchor.constraint(equalTo: fiserv.widthAnchor, multiplier: 1.5/2).isActive = true
 
         let cardHolder = UILabel()
-        cardHolder.textColor = UIColor.white.withAlphaComponent(0.8)
+        cardHolder.textColor = UIColor.fiservWhite.withAlphaComponent(0.8)
         cardHolder.text = "Card Holder"
         cardHolder.font = UIFont.systemFont(ofSize: 12, weight: .thin)
         self.addSubview(cardHolder)
@@ -94,7 +94,7 @@ class CreditCard: UIView {
         
         let cardName = UILabel()
         cardName.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        cardName.textColor = .white
+        cardName.textColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
         self.addSubview(cardName)
         cardName.translatesAutoresizingMaskIntoConstraints = false
         cardName.topAnchor.constraint(equalTo: cardHolder.bottomAnchor, constant: padding).isActive = true
@@ -102,7 +102,7 @@ class CreditCard: UIView {
         self.cardName = cardName
         
         let expiry = UILabel()
-        expiry.textColor = UIColor.white.withAlphaComponent(0.8)
+        expiry.textColor = UIColor.fiservWhite.withAlphaComponent(0.8)
         expiry.font = UIFont.systemFont(ofSize: 12, weight: .thin)
         self.addSubview(expiry)
         expiry.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +111,7 @@ class CreditCard: UIView {
         self.expiryLabel = expiry
         
         let date = UILabel()
-        date.textColor = .white
+        date.textColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
         date.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         self.addSubview(date)
         date.translatesAutoresizingMaskIntoConstraints = false

@@ -21,8 +21,8 @@ class TransactionSegmentControl: UIControl {
     private weak var bottomEdge: UIView!
 
     private var segmentColor: UIColor
-    private var segmentSelectedColor: UIColor = .white
-    private var segmentUnselectedColor: UIColor = .fiservOrange
+    private var segmentSelectedColor: UIColor = UIColor.fiservWhite.combineWith(opacity: .Solid)
+    private var segmentUnselectedColor: UIColor = UIColor.fiservOrange.combineWith(opacity: .Solid)
 
     private var segmentButtons = [UIButton]()
     private let cornerSize = CGSize(width: padding, height: padding)
