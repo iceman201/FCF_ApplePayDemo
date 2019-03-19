@@ -34,14 +34,19 @@ class WalletViewController: UIViewController {
     var currentCardIndex: Int? {
         didSet {
             if sectionType == .balance {
-                self.contentTable?.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: UITableView.RowAnimation.none)
+                DispatchQueue.main.async() {
+                    self.contentTable?.reloadData()
+                }
+                
             }
         }
     }
 
     fileprivate var sectionType: WalletViewSectionType = .balance {
         didSet {
-            self.contentTable?.reloadData()
+            DispatchQueue.main.async() {
+                self.contentTable?.reloadData()
+            }
         }
     }
 
