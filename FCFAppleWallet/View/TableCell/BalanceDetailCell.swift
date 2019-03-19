@@ -63,7 +63,7 @@ class BalanceDetailCell: UITableViewCell {
         dateLabel.topAnchor.constraint(equalTo: contentContainer.topAnchor, constant: padding * 2).isActive = true
         self.statementDate = dateLabel
 
-        let period = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let period = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         period.text = "Statement period:"
         contentContainer.addSubview(period)
         period.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +77,7 @@ class BalanceDetailCell: UITableViewCell {
         periodLabel.topAnchor.constraint(equalTo: period.topAnchor).isActive = true
         self.period = periodLabel
 
-        let closeBalance = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let closeBalance = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         closeBalance.text = "Closing balance:"
         contentContainer.addSubview(closeBalance)
         closeBalance.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +91,7 @@ class BalanceDetailCell: UITableViewCell {
         closeBalanceLabel.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor).isActive = true
         self.closeBalance = closeBalanceLabel
 
-        let minimumDue = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let minimumDue = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         minimumDue.text = "Minimum payment due:"
         contentContainer.addSubview(minimumDue)
         minimumDue.translatesAutoresizingMaskIntoConstraints = false
@@ -105,7 +105,7 @@ class BalanceDetailCell: UITableViewCell {
         minimumDueLabel.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor).isActive = true
         self.minimumPaymentDue = minimumDueLabel
 
-        let dueBy = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let dueBy = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         dueBy.text = "Due by:"
         contentContainer.addSubview(dueBy)
         dueBy.translatesAutoresizingMaskIntoConstraints = false
@@ -119,11 +119,11 @@ class BalanceDetailCell: UITableViewCell {
         dueByLabel.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor).isActive = true
         self.dueBy = dueByLabel
 
-        let paymentsTowardsClosingBalance = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let paymentsTowardsClosingBalance = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         let labelAttr: NSMutableAttributedString = NSMutableAttributedString(string: "Payments towards closing balance: \n",
                                                                              attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.fiservWhite.combineWith(opacity: .Secondary)])
         labelAttr.append(NSAttributedString(string: "(updated overnight on business days)",
-                                            attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 10, weight: .thin), NSAttributedString.Key.foregroundColor: UIColor.fiservWhite.combineWith(opacity: .Secondary)]))
+                                            attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 10, weight: .thin), NSAttributedString.Key.foregroundColor: UIColor.fiservWhite.combineWith(opacity: .Primary)]))
         paymentsTowardsClosingBalance.attributedText = labelAttr
         paymentsTowardsClosingBalance.numberOfLines = 0
         contentContainer.addSubview(paymentsTowardsClosingBalance)
@@ -140,7 +140,7 @@ class BalanceDetailCell: UITableViewCell {
 
         let divider = self.addDivider(on: contentContainer, topOf: paymentsTowardsClosingBalance)
 
-        let accountType = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let accountType = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         accountType.text = "Account type:"
         contentContainer.addSubview(accountType)
         accountType.translatesAutoresizingMaskIntoConstraints = false
@@ -154,7 +154,7 @@ class BalanceDetailCell: UITableViewCell {
         accountTypeLabel.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor).isActive = true
         self.accountType = accountTypeLabel
 
-        let creditLimit = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let creditLimit = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         creditLimit.text = "Credit limit:"
         contentContainer.addSubview(creditLimit)
         creditLimit.translatesAutoresizingMaskIntoConstraints = false
@@ -170,7 +170,7 @@ class BalanceDetailCell: UITableViewCell {
 
         let dividerOne = self.addDivider(on: contentContainer, topOf: creditLimit)
 
-        let purchaseInterestRate = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let purchaseInterestRate = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         purchaseInterestRate.text = "Purchase interest rate:"
         contentContainer.addSubview(purchaseInterestRate)
         purchaseInterestRate.translatesAutoresizingMaskIntoConstraints = false
@@ -184,7 +184,7 @@ class BalanceDetailCell: UITableViewCell {
         purchaseInterestRateLabel.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor).isActive = true
         self.purchaseInterestRate = purchaseInterestRateLabel
 
-        let cashAdvanceInterestRate = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Secondary))
+        let cashAdvanceInterestRate = DetailsLabel(fontWeight: .thin, textColor: UIColor.fiservWhite.combineWith(opacity: .Primary))
         cashAdvanceInterestRate.text = "Cash advance interest rate:"
         contentContainer.addSubview(cashAdvanceInterestRate)
         cashAdvanceInterestRate.translatesAutoresizingMaskIntoConstraints = false

@@ -11,6 +11,7 @@ import UIKit
 class CreditCardBalanceView: UIView {
     var container: UIView?
     let shapeLayer = CAShapeLayer()
+    let gradient = CAGradientLayer()
     
     weak var balanceLabel: BalanceLabel?
     
@@ -27,19 +28,25 @@ class CreditCardBalanceView: UIView {
         super.draw(rect)
         
         if let center = self.container?.center, let height = self.container?.frame.height {
-            let bottomCenter = CGPoint(x: center.x, y: height * 3.2/5)
+            let bottomCenter = CGPoint(x: center.x, y: height * 3.28/5)
             let circularPath = UIBezierPath(arcCenter: bottomCenter,
-                                            radius: height/1.6,
+                                            radius: height/1.65,
                                             startAngle: -1.2*CGFloat.pi,
                                             endAngle: -1.8*CGFloat.pi,
                                             clockwise: true)
             let trackLayer = CAShapeLayer()
             trackLayer.path = circularPath.cgPath
-            trackLayer.strokeColor = UIColor.lightGray.cgColor
+            trackLayer.strokeColor = UIColor.fiservBlack.combineWith(opacity: .BTPressed).cgColor
             trackLayer.lineWidth = padding
             trackLayer.fillColor = UIColor.clear.cgColor
             trackLayer.lineCap = .round
             self.layer.addSublayer(trackLayer)
+
+
+            gradient.frame =  CGRect(x: 0, y: 0, width: self.container?.frame.width ?? 0.0, height: height + 5)
+            gradient.colors = [UIColor.fiservOrange.combineWith(opacity: .BTPressed).cgColor, UIColor.fiservOrange.cgColor]
+            gradient.startPoint = CGPoint(x: 0, y: 1)
+            gradient.endPoint = CGPoint(x: 0.75, y: 1)
             
             shapeLayer.path = circularPath.cgPath
             shapeLayer.strokeColor = UIColor.fiservOrange.cgColor
@@ -47,7 +54,10 @@ class CreditCardBalanceView: UIView {
             shapeLayer.fillColor = UIColor.clear.cgColor
             shapeLayer.lineCap = .round
             shapeLayer.strokeEnd = 0
-            self.layer.addSublayer(shapeLayer)
+
+            gradient.mask = shapeLayer
+            self.layer.addSublayer(gradient)//shapeLayer)
+
         }
     }
     

@@ -82,6 +82,10 @@ extension UIColor {
         //Note: Somehow Apple white doesn't contain blue index
         return UIColor(displayP3Red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
     }
+    open class var fiservBlack: UIColor {
+        //Note: Somehow Apple white doesn't contain blue index
+        return UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+    }
     
     func combineWith(opacity: ColorOpacity) -> UIColor {
         
