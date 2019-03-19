@@ -28,6 +28,7 @@ class WalletViewController: UIViewController {
 
     let kTransactionCell = "kTransactionCell"
     let kBalanceCell = "kBalanceCell"
+    let kStatementCell = "kStatementCell"
 
     let backgroundColor: UIColor = UIColor(displayP3Red: 249.0/255.0, green: 247.0/255.0, blue: 235.0/255.0, alpha: 1)
     let cardInfo = CreditCard.generateCards()
@@ -65,6 +66,7 @@ class WalletViewController: UIViewController {
         content.backgroundColor = backgroundColor
         content.register(TransactionRecordCell.self, forCellReuseIdentifier: kTransactionCell)
         content.register(BalanceDetailCell.self, forCellReuseIdentifier: kBalanceCell)
+        content.register(StatementCell.self, forCellReuseIdentifier: kStatementCell)
         self.view.addSubview(content)
         content.translatesAutoresizingMaskIntoConstraints = false
         content.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
@@ -290,10 +292,18 @@ extension WalletViewController: UITableViewDataSource {
         case WalletViewSectionType.balance:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: kBalanceCell, for: indexPath) as? BalanceDetailCell else { return UITableViewCell() }
             let details = cardInfo[self.currentCardIndex ?? 0].cardDetails
-            cell.loadCardDetails(period: details.period, closeBalance: details.closeBalance, minimumPaymentDue: details.minimumPayDue, dueBy: details.dueBy, ptcb: details.ptcb, type: details.type, creditLimit: details.creditLimit, purchaseInterestRate: details.purchaseRate, cashInterestRate: details.cashRate)
+            cell.loadCardDetails(period: details.period,
+                                 closeBalance: details.closeBalance,
+                                 minimumPaymentDue: details.minimumPayDue,
+                                 dueBy: details.dueBy,
+                                 ptcb: details.ptcb,
+                                 type: details.type,
+                                 creditLimit: details.creditLimit,
+                                 purchaseInterestRate: details.purchaseRate,
+                                 cashInterestRate: details.cashRate)
             return cell
         case WalletViewSectionType.statement:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: kStatementCell, for: indexPath) as? StatementCell else { return UITableViewCell() }
             return cell
         case WalletViewSectionType.transaction:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: kTransactionCell, for: indexPath) as? TransactionRecordCell else { return UITableViewCell() }
