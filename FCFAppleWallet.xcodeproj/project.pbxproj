@@ -10,6 +10,7 @@
 		058A4A6222350F7D00D6CBC8 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058A4A6122350F7D00D6CBC8 /* PaymentView.swift */; };
 		058A4A642239117F00D6CBC8 /* BalanceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058A4A632239117F00D6CBC8 /* BalanceLabel.swift */; };
 		05B374EA222EA1B7008695F3 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B374E9222EA1B7008695F3 /* CreditCardView.swift */; };
+		05B6BD862240F1F40089713E /* StatementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B6BD852240F1F40089713E /* StatementCell.swift */; };
 		05E1AC15222D3E0000A9895A /* ParseFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC14222D3E0000A9895A /* ParseFont.swift */; };
 		05E1AC18222D3E8B00A9895A /* EXTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E1AC17222D3E8B00A9895A /* EXTFont.swift */; };
 		05E1AC19222D44EE00A9895A /* FontAwesome5Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 05868887222D2E4500BFB2F3 /* FontAwesome5Free-Solid-900.otf */; };
@@ -40,6 +41,7 @@
 		058A4A6122350F7D00D6CBC8 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		058A4A632239117F00D6CBC8 /* BalanceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceLabel.swift; sourceTree = "<group>"; };
 		05B374E9222EA1B7008695F3 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
+		05B6BD852240F1F40089713E /* StatementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementCell.swift; sourceTree = "<group>"; };
 		05E1AC14222D3E0000A9895A /* ParseFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFont.swift; sourceTree = "<group>"; };
 		05E1AC17222D3E8B00A9895A /* EXTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXTFont.swift; sourceTree = "<group>"; };
 		05E1AC1A222D46D300A9895A /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				EA1C53622237659E0091CC4F /* BalanceDetailCell.swift */,
 				05E1AC1C222D4A4D00A9895A /* TransactionRecordCell.swift */,
+				05B6BD852240F1F40089713E /* StatementCell.swift */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				05B374EA222EA1B7008695F3 /* CreditCardView.swift in Sources */,
 				05E1AC1D222D4A4D00A9895A /* TransactionRecordCell.swift in Sources */,
 				EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */,
+				05B6BD862240F1F40089713E /* StatementCell.swift in Sources */,
 				EA1C53702238A1640091CC4F /* CreditCardBalanceView.swift in Sources */,
 				EA8CCE7C21BF73C6003831C3 /* Defines.swift in Sources */,
 				05E1AC15222D3E0000A9895A /* ParseFont.swift in Sources */,
