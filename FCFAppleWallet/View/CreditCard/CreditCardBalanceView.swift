@@ -42,7 +42,6 @@ class CreditCardBalanceView: UIView {
             trackLayer.lineCap = .round
             self.layer.addSublayer(trackLayer)
 
-
             gradient.frame =  CGRect(x: 0, y: 0, width: self.container?.frame.width ?? 0.0, height: height + 5)
             gradient.colors = [UIColor.fiservOrange.combineWith(opacity: .BTPressed).cgColor, UIColor.fiservOrange.cgColor]
             gradient.startPoint = CGPoint(x: 0, y: 1)

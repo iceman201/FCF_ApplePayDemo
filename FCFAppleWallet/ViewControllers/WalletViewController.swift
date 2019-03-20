@@ -263,7 +263,7 @@ extension WalletViewController: UITableViewDelegate {
         case .balance:
             return 320
         case .statement:
-            return 120
+            return 160
         case .transaction:
             return padding * 8
         }
