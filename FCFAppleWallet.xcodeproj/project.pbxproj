@@ -23,6 +23,7 @@
 		EA1C53612236227E0091CC4F /* TransactionSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C53602236227E0091CC4F /* TransactionSegmentControl.swift */; };
 		EA1C53632237659E0091CC4F /* BalanceDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C53622237659E0091CC4F /* BalanceDetailCell.swift */; };
 		EA1C53702238A1640091CC4F /* CreditCardBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C536F2238A1640091CC4F /* CreditCardBalanceView.swift */; };
+		EA54BF1C2241C4A200E3F154 /* Font Awesome5Free-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA54BF1B2241C49D00E3F154 /* Font Awesome5Free-Regular-400.otf */; };
 		EA8CCE6621BF6286003831C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6521BF6286003831C3 /* AppDelegate.swift */; };
 		EA8CCE6821BF6286003831C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CCE6721BF6286003831C3 /* MainViewController.swift */; };
 		EA8CCE6B21BF6286003831C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA8CCE6921BF6286003831C3 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		EA1C53602236227E0091CC4F /* TransactionSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSegmentControl.swift; sourceTree = "<group>"; };
 		EA1C53622237659E0091CC4F /* BalanceDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceDetailCell.swift; sourceTree = "<group>"; };
 		EA1C536F2238A1640091CC4F /* CreditCardBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardBalanceView.swift; sourceTree = "<group>"; };
+		EA54BF1B2241C49D00E3F154 /* Font Awesome5Free-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome5Free-Regular-400.otf"; sourceTree = "<group>"; };
 		EA8CCE6221BF6286003831C3 /* FCFAppleWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FCFAppleWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA8CCE6521BF6286003831C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA8CCE6721BF6286003831C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				05F7C8D5222FDD8D00C4E499 /* Paymentfont-webfont.ttf */,
 				05F7C8D7222FF5C300C4E499 /* FontAwesome5Brands-Regular-400.otf */,
+				EA54BF1B2241C49D00E3F154 /* Font Awesome5Free-Regular-400.otf */,
 				05868887222D2E4500BFB2F3 /* FontAwesome5Free-Solid-900.otf */,
 			);
 			path = Fonts;
@@ -293,6 +296,7 @@
 			files = (
 				05F7C8DA222FF75800C4E499 /* Paymentfont-webfont.ttf in Resources */,
 				EA8CCE7021BF6287003831C3 /* LaunchScreen.storyboard in Resources */,
+				EA54BF1C2241C4A200E3F154 /* Font Awesome5Free-Regular-400.otf in Resources */,
 				EA8CCE6D21BF6287003831C3 /* Assets.xcassets in Resources */,
 				05E1AC19222D44EE00A9895A /* FontAwesome5Free-Solid-900.otf in Resources */,
 				EA8CCE6B21BF6286003831C3 /* Main.storyboard in Resources */,

@@ -46,6 +46,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome5Free-Solid-900.otf</string>
+		<string>Font Awesome5Free-Regular-400.otf</string>
 		<string>FontAwesome5Brands-Regular-400.otf</string>
 		<string>Paymentfont-webfont.ttf</string>
 	</array>
