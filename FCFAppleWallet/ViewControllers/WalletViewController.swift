@@ -140,6 +140,7 @@ class WalletViewController: UIViewController {
         
         let payment = PaymentView()
         payment.sectionTitle?.text = "Send Money to"
+        payment.paylist = ["aa", "ss", "fadsf"]
         headerView.addSubview(payment)
         payment.translatesAutoresizingMaskIntoConstraints = false
         payment.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: padding).isActive = true

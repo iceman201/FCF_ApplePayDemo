@@ -12,7 +12,16 @@ class PaymentView: UIView {
 
     var sectionTitle: UILabel?
     let kPaymentReceiverIdentifier = "kPaymentReceiverIdentifier"
-    
+
+    var paylist: [String]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.contactCollectionView?.reloadData()
+            }
+        }
+    }
+    private var contactCollectionView: UICollectionView?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadView()
@@ -54,6 +63,7 @@ class PaymentView: UIView {
         container.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding).isActive = true
         container.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         container.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.contactCollectionView = container
     }
 }
 
@@ -69,7 +79,7 @@ extension PaymentView: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return (self.paylist?.count ?? 0) + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -101,13 +111,14 @@ extension PaymentView: UICollectionViewDataSource {
             
             let icon = "\(FontAwesome.plus)" as NSString
             icon.draw(in: CGRect(x: 6, y: 3, width: 64, height: 64), withAttributes: [NSAttributedString.Key.font: UIFont.fontAwesome(ofSize: 64), NSAttributedString.Key.foregroundColor: UIColor.fiservWhite.combineWith(opacity: .Solid)])
-            
             let iconImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndPDFContext()
             
             cell.loadInfo(name: nil, avatar: iconImage!)
         } else {
-            cell.loadInfo(name: "haha", avatar: UIImage(named: "\(indexPath.row)")!)
+            if let name = paylist?[indexPath.row - 1] {
+                cell.loadInfo(name: name, avatar: UIImage(named: "\(indexPath.row)")!)
+            }
         }
         return cell
     }
