@@ -6,32 +6,13 @@
 //  Copyright © 2018 Liguo Jiao. All rights reserved.
 //
 
-/*
-#pragma mark - View Life
-//视图生命周期
-#pragma mark - Setup
-//创建视图等
-#pragma mark - Lazy Load、Getter、Setter
-//懒加载、Getter和Setter
-#pragma mark - Event、Callbacks
-//事件、回调等
-#pragma mark - Delegate And DataSource
-//代理和数据源方法
-#pragma mark - Private
-//私有方法
-*/
-
 import UIKit
 class MainViewController: UIViewController {
-
-
     weak var payLabel: UILabel?
-
-
+    
     override func loadView() {
         super.loadView()
         self.navigationController?.isNavigationBarHidden = true
-        
 
         let watermark = UIImageView(image: #imageLiteral(resourceName: "pay_tag"), highlightedImage: nil)
         self.view.addSubview(watermark)
@@ -74,7 +55,6 @@ class MainViewController: UIViewController {
         pay.heightAnchor.constraint(equalToConstant: 80).isActive = true
         pay.widthAnchor.constraint(equalToConstant: 80).isActive = true
 
-
         let tipMessage = UILabel()
         tipMessage.numberOfLines = 0
         tipMessage.textAlignment = .center
@@ -91,8 +71,6 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
     }
 
     @objc func tapOnPay() {

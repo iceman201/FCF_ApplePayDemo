@@ -35,7 +35,6 @@ class BalanceLabel: UILabel {
     var timer: Timer?
     var counterType: CounterType!
     var counterAnimation: CounterAnimationType!
-    
     var velocity: Float = 3.0
     var currentValue: Float  {
         if self.progress >= duration {
@@ -78,7 +77,6 @@ class BalanceLabel: UILabel {
         self.timer?.invalidate()
         self.timer = nil
     }
-    
     
     func updateCounter(counterValue: Float) -> Float {
         guard let type = self.counterAnimation else { return 0 }

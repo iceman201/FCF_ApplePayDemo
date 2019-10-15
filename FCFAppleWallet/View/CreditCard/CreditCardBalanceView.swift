@@ -55,8 +55,7 @@ class CreditCardBalanceView: UIView {
             shapeLayer.strokeEnd = 0
 
             gradient.mask = shapeLayer
-            self.layer.addSublayer(gradient)//shapeLayer)
-
+            self.layer.addSublayer(gradient)
         }
     }
     
@@ -116,5 +115,4 @@ class CreditCardBalanceView: UIView {
         strockAnimation.isRemovedOnCompletion = false
         shapeLayer.add(strockAnimation, forKey: "urSoBasic")
     }
-
 }
