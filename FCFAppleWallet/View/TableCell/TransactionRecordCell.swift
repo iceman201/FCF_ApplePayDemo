@@ -14,7 +14,6 @@ class TransactionRecordCell: UITableViewCell {
     var dateLineLabel: UILabel!
     var balanceLabel: UILabel!
     var contentBackground: UIView!
-
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -81,5 +80,4 @@ class TransactionRecordCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

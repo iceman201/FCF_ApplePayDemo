@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 // MARK: UI Components
 extension UIView {
     func addDivider(on headerView: UIView, topOf headerTopContainerView: UIView, color: UIColor = .white) -> UIView {
@@ -57,7 +55,6 @@ extension UIView {
         self.layer.rasterizationScale = UIScreen.main.scale
     }
 }
-
 
 // MARK: UI Style sheet
 let padding: CGFloat = 8
@@ -108,9 +105,7 @@ extension UIColor {
 
 /* linear equations
  opacity x Overlay + (1-opacity) * Background
- 
- https://www.viget.com/articles/equating-color-and-transparency/
- 
+
 Variables:
 c - color (unknown)
 f - opacity (unknown)
@@ -128,4 +123,3 @@ Therefore:
 f = 168/255 ≈ 65.9%.
 c = 6205/56 ≈ 110.8.
 */
-

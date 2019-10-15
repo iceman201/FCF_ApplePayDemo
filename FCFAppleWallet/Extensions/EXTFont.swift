@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 public extension UIFont {
-    public enum FontAwesomeWeight {
+    enum FontAwesomeWeight {
         case Regular
         case Solid
         case Branding
     }
 
-    public class func fontAwesome(ofSize fontSize: CGFloat, weight: FontAwesomeWeight = .Solid) -> UIFont {
+    class func fontAwesome(ofSize fontSize: CGFloat, weight: FontAwesomeWeight = .Solid) -> UIFont {
         switch weight {
         case .Regular:
             return UIFont(name: "FontAwesome5Free-Regular", size: fontSize)!
@@ -27,7 +27,8 @@ public extension UIFont {
         }
 
     }
-    public class func paymentLogo(ofSize fontSize: CGFloat) -> UIFont {
+
+    class func paymentLogo(ofSize fontSize: CGFloat) -> UIFont {
         return UIFont(name: "paymentfont-webfont", size: fontSize)!
     }
 }

@@ -9,10 +9,8 @@
 import UIKit
 
 class PaymentView: UIView {
-
     var sectionTitle: UILabel?
     let kPaymentReceiverIdentifier = "kPaymentReceiverIdentifier"
-
     var paylist: [String]? {
         didSet {
             DispatchQueue.main.async {
@@ -88,16 +86,6 @@ extension PaymentView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         if indexPath.row == 0 {
-          /*  - (UIImage *)imageFromString:(NSString *)string attributes:(NSDictionary *)attributes size:(CGSize)size
-            {
-                UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-                [string drawInRect:CGRectMake(0, 0, size.width, size.height) withAttributes:attributes];
-                UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                
-                return image;
-            }*/
-            
             let gradientLayer = CAGradientLayer()
             gradientLayer.colors = [UIColor(hexString: "#FDC830").cgColor,
                                     UIColor(hexString: "#f7797d").cgColor,

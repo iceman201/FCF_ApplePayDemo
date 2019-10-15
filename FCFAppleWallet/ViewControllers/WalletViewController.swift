@@ -384,5 +384,4 @@ extension WalletViewController: CreditCardScrollingDelegate {
     func getSelectCardBalance(balance: Float) {
         self.creditCardBalanceView?.balanceLabel?.counting(fromValue: 0, toValue: balance, withDuration: 1, animationType: .EaseIn, counterType: .Float)
     }
-
 }

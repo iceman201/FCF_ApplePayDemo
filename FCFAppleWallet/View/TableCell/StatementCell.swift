@@ -9,7 +9,6 @@
 import UIKit
 
 class StatementCell: UITableViewCell {
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         loadView()
@@ -41,7 +40,6 @@ class StatementCell: UITableViewCell {
         available.topAnchor.constraint(equalTo: container.topAnchor, constant: padding * 2).isActive = true
 
         let availableLable = UILabel()
-
         let availableAttr = NSMutableAttributedString(string: "Last 6 months",
                                                       attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: .regular),
                                                                    NSAttributedString.Key.foregroundColor : UIColor.fiservWhite])
@@ -55,7 +53,7 @@ class StatementCell: UITableViewCell {
         availableLable.topAnchor.constraint(equalTo: available.topAnchor).isActive = true
         availableLable.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding * 2).isActive = true
 
-        container.addDivider(on: container, topOf: availableLable)
+        let _ = container.addDivider(on: container, topOf: availableLable)
 
         let document = UILabel()
         let style = NSMutableParagraphStyle()
@@ -75,9 +73,5 @@ class StatementCell: UITableViewCell {
         document.translatesAutoresizingMaskIntoConstraints = false
         document.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -padding * 2).isActive = true
         document.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -padding * 2).isActive = true
-
-
-
     }
-
 }
